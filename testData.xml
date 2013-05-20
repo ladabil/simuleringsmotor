@@ -4,7 +4,7 @@
 		<bruttoAreal>200</bruttoAreal>
 		<pRomAreal>100</pRomAreal>
 		<Varmetap type="class">
-		<isolasjonsTykkelse>10</isolasjonsTykkelse>
+			<isolasjonsTykkelse>10</isolasjonsTykkelse>
 		</Varmetap>
 	</Enebolig>
 	<Familie  type="class">
