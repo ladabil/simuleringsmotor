@@ -1,6 +1,7 @@
 package no.hin.student.y2013.grp2it.simuleringsmotor;
 
 import java.io.File;
+import java.util.Iterator;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,6 +11,7 @@ import org.w3c.dom.Node;
 
 public class SimuleringsMotor extends SimulatorBase {
 	static SimuleringsMotor simMotor = null;
+	public Tidsrom tidsrom = null;
 	
 	/**
 	 * @param args
@@ -21,6 +23,28 @@ public class SimuleringsMotor extends SimulatorBase {
 		simMotor.doRun();
 	}
 	
+	public SimuleringsMotor()
+	{
+	}
+	
+	public static SimuleringsMotor getSimuleringsMotor()
+	{
+		return simMotor;
+	}
+	
+	public static Tidsrom getTidsrom()
+	{
+		return SimuleringsMotor.getSimuleringsMotor().tidsrom;
+	}
+	
+	public static void setTidsrom(Tidsrom tidsrom)
+	{
+		SimuleringsMotor.getSimuleringsMotor().tidsrom = tidsrom;
+	}
+
+	/*
+	 * Setter opp alle objekter/klasser og kjører simuleringen.
+	 */
 	public void doRun()
 	{
 		System.out.println("Running");
@@ -28,6 +52,50 @@ public class SimuleringsMotor extends SimulatorBase {
 		parseXMLFile();
 		
 		System.out.println("Died");
+		
+		if ( this.tidsrom == null )
+		{
+			System.out.println("mangler Tidsrom-objektet.. avbryter simuleringen");
+			System.exit(-2);
+		}
+		
+		long energiForbruk = 0, curEnergiForbruk = 0;
+		
+		for ( long i=this.tidsrom.getStartDateTime().getTime();i<this.tidsrom.getEndDateTime().getTime();i+=this.tidsrom.getOpplosningInMs())
+		{
+			System.out.println("Simulating - i=" + i);
+
+			curEnergiForbruk = getEnergiForbrukForPeriode(i, this.tidsrom.getOpplosningInMs());
+	
+			System.out.println("Fobruket dette perioden = " + curEnergiForbruk);
+			energiForbruk += curEnergiForbruk;
+		}
+		
+		System.out.println("Energiforbruk for perioden: " + energiForbruk);
+	}
+	
+	/*
+	 * henter beregningene fra objekter for ett gitt tidsrom og returnerer forbruket som watt
+	 * 
+	 * lengde er i ms
+	 */
+	public long getEnergiForbrukForPeriode(long startTime, long lengde)
+	{
+		Iterator sbIt = simulatorBaseList.iterator();
+		long energiFobruk = 0;
+		
+		while (sbIt.hasNext() )
+		{
+			SimulatorBase tmpSimBase=(SimulatorBase)sbIt.next();
+
+			// Utfør først beregningene
+			tmpSimBase.doBeregning(startTime, lengde);
+
+			// Hent så beregningen
+			energiFobruk += tmpSimBase.getBeregning();
+		}
+		
+		return energiFobruk;
 	}
 	
 	public void parseXMLFile()
@@ -55,7 +123,7 @@ public class SimuleringsMotor extends SimulatorBase {
 	    		if ( simuleringsNode.hasChildNodes() )
 	    		{
 		    		this.setXMLNodeList(simuleringsNode.getChildNodes());
-		    		this.parseXML();
+		    		this.parseXML(true);
 	    		}
 	    	}
 	    	

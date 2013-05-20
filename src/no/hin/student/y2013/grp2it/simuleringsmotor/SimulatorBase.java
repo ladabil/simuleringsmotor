@@ -1,5 +1,8 @@
 package no.hin.student.y2013.grp2it.simuleringsmotor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -11,16 +14,19 @@ import org.w3c.dom.NodeList;
 public class SimulatorBase {
 	public static final String packageName = "no.hin.student.y2013.grp2it.simuleringsmotor";
 	private NodeList nodeList;
-	private SimulatorBase[] simulatorBaseList;
+	protected List<SimulatorBase> simulatorBaseList = new ArrayList<SimulatorBase>();
+	
+	protected double energiForbruk = 0;
 
 	public SimulatorBase()
 	{
 		this.nodeList = null;
+		this.energiForbruk = 0;
 	}
 	
 	public double getBeregning()
 	{
-		return 0.0;
+		return this.energiForbruk;
 	}
 	
 	// Setter nodelisten (noder i XML-filen som tilhører meg..)
@@ -38,6 +44,11 @@ public class SimulatorBase {
 	// parse XML-nodelisten..
 	public boolean parseXML()
 	{
+		return parseXML(false);
+	}
+	
+	public boolean parseXML(boolean isRoot)
+	{
 		SimulatorBase tmpSimBase;
 		
 		for (int count = 0; count < this.nodeList.getLength(); count++) {
@@ -50,7 +61,7 @@ public class SimulatorBase {
 				System.out.println("Node Value =" + currentNode.getTextContent());
 		 
 				this.parseXMLNodeElement(currentNode);
-				
+
 				// Sjekk om vi har attributter
 				if (currentNode.hasAttributes()) {
 
@@ -79,7 +90,22 @@ public class SimulatorBase {
 								tmpSimBase.setXMLNodeList(currentNode.getChildNodes());
 							}
 							
+							simulatorBaseList.add(tmpSimBase);
+							
 							tmpSimBase.parseXML();
+							
+							// Tidsrom:
+							// Sjekk om vi er ett "root+1"-element (dvs rett under <simulering>)
+							if ( isRoot = true )
+							{
+								System.out.println("Root for tag: " + currentNode.getNodeName());
+								
+								// Spesialhåndtering av tidsrom - legge denne til på root av simuleringsmotoret
+								if ( currentNode.getNodeName().equalsIgnoreCase("tidsrom") )
+								{
+									SimuleringsMotor.setTidsrom((Tidsrom) tmpSimBase);
+								}
+							}
 							
 							System.out.println(tmpSimBase);
 						}
@@ -118,5 +144,16 @@ public class SimulatorBase {
 		}
 		
 		return baseClass;
-	}		
+	}	
+	
+	/*
+	 * Utfører beregninger på ett gitt tidspunkt
+	 */
+	public boolean doBeregning(long startTime, long lengde)
+	{
+		this.energiForbruk = 0;
+		this.energiForbruk = (long) (1 + (Math.random() * 3000));
+		
+		return true;
+	}
 }
