@@ -6,6 +6,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 public class SimuleringsMotor extends SimulatorBase {
 	static SimuleringsMotor simMotor = null;
@@ -24,12 +25,12 @@ public class SimuleringsMotor extends SimulatorBase {
 	{
 		System.out.println("Running");
 		
-		simulatorTest();
+		parseXMLFile();
 		
 		System.out.println("Died");
 	}
 	
-	public void simulatorTest()
+	public void parseXMLFile()
 	{
 	    try {
 	    	 
@@ -42,13 +43,25 @@ public class SimuleringsMotor extends SimulatorBase {
 	     
 	    	System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 	     
-	    	if (doc.hasChildNodes()) {
-	    		this.setXMLNodeList(doc.getChildNodes());
-	    		this.parseXML();
-//	    		printNote(doc.getChildNodes());
+	    	if ( !doc.getDocumentElement().getNodeName().equalsIgnoreCase("simulering") )
+	    	{
+	    		System.out.println("feil i root tag i xml-filen, forventer \"simulering\" - fikk: " + doc.getDocumentElement().getNodeName());
+	    		return;
 	    	}
+	    	
+	    	if (doc.hasChildNodes()) {
+	    		Node simuleringsNode = doc.getChildNodes().item(0);
+	    		
+	    		if ( simuleringsNode.hasChildNodes() )
+	    		{
+		    		this.setXMLNodeList(simuleringsNode.getChildNodes());
+		    		this.parseXML();
+	    		}
+	    	}
+	    	
 	    } catch (Exception e) {
 	    	System.out.println(e.getMessage());
 	    }
 	}
+
 }

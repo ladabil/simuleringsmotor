@@ -9,7 +9,9 @@ import org.w3c.dom.NodeList;
  */
 
 public class SimulatorBase {
+	public static final String packageName = "no.hin.student.y2013.grp2it.simuleringsmotor";
 	private NodeList nodeList;
+	private SimulatorBase[] simulatorBaseList;
 
 	public SimulatorBase()
 	{
@@ -22,9 +24,9 @@ public class SimulatorBase {
 	}
 	
 	// Setter nodelisten (noder i XML-filen som tilhører meg..)
-	public void setXMLNodeList(NodeList nodeList) {
-		  
-	  
+	public void setXMLNodeList(NodeList nodeList) 
+	{
+		this.nodeList = nodeList;
 	}
 	  
 	// Hent nodelisten
@@ -36,6 +38,8 @@ public class SimulatorBase {
 	// parse XML-nodelisten..
 	public boolean parseXML()
 	{
+		SimulatorBase tmpSimBase;
+		
 		for (int count = 0; count < this.nodeList.getLength(); count++) {
 			  
 			Node currentNode = this.nodeList.item(count);
@@ -45,6 +49,8 @@ public class SimulatorBase {
 				System.out.println("\nNode Name =" + currentNode.getNodeName() + " [OPEN]");
 				System.out.println("Node Value =" + currentNode.getTextContent());
 		 
+				this.parseXMLNodeElement(currentNode);
+				
 				// Sjekk om vi har attributter
 				if (currentNode.hasAttributes()) {
 
@@ -62,10 +68,20 @@ public class SimulatorBase {
 							System.out.println("Laster klassen: " + currentNode.getNodeName());
 							System.out.println("------------------------------------------------");
 
-							if (currentNode.hasChildNodes()) {
-								// loop again if has child nodes
-//								printNote(currentNode.getChildNodes());
+							tmpSimBase = this.loadClass(currentNode.getNodeName());
+							
+							if ( tmpSimBase == null )
+							{
+								continue;
 							}
+								
+							if (currentNode.hasChildNodes()) {
+								tmpSimBase.setXMLNodeList(currentNode.getChildNodes());
+							}
+							
+							tmpSimBase.parseXML();
+							
+							System.out.println(tmpSimBase);
 						}
 		 
 //						System.out.println("attr name : " + node.getNodeName());
@@ -78,4 +94,29 @@ public class SimulatorBase {
 
 		return true;
 	}
+	
+	public void parseXMLNodeElement(Node node)
+	{
+		System.out.println("parseXMLNodeElement(Node node): Not implemented in SimulatorBase");
+	}
+	
+	
+	// Laster inn en ny klasse
+	public SimulatorBase loadClass(String className)
+	{
+		String fullClassName = packageName + "." + className;
+		
+		Class loadedClass = null;
+		SimulatorBase baseClass = null;
+		
+		try {
+			loadedClass = Class.forName(fullClassName);
+			baseClass = (SimulatorBase) loadedClass.newInstance();
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return baseClass;
+	}		
 }
