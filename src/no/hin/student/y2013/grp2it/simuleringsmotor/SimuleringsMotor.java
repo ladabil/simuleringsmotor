@@ -1,5 +1,12 @@
 package no.hin.student.y2013.grp2it.simuleringsmotor;
 
+import java.io.File;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+
 public class SimuleringsMotor extends SimulatorBase {
 	static SimuleringsMotor simMotor = null;
 	
@@ -17,21 +24,31 @@ public class SimuleringsMotor extends SimulatorBase {
 	{
 		System.out.println("Running");
 		
-		System.out.print("Sleeping");
-		for ( int i=0; i<100; i++)
-		{
-			try {
-				Thread.sleep(100);
-				System.out.print(".");
-				
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		System.out.println(".");
+		simulatorTest();
 		
 		System.out.println("Died");
 	}
-
+	
+	public void simulatorTest()
+	{
+	    try {
+	    	 
+	    	File file = new File("./testData.xml");
+	     
+	    	DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
+	                                 .newDocumentBuilder();
+	     
+	    	Document doc = dBuilder.parse(file);
+	     
+	    	System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+	     
+	    	if (doc.hasChildNodes()) {
+	    		this.setXMLNodeList(doc.getChildNodes());
+	    		this.parseXML();
+//	    		printNote(doc.getChildNodes());
+	    	}
+	    } catch (Exception e) {
+	    	System.out.println(e.getMessage());
+	    }
+	}
 }
