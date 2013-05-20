@@ -12,6 +12,7 @@ import org.w3c.dom.Node;
 public class SimuleringsMotor extends SimulatorBase {
 	static SimuleringsMotor simMotor = null;
 	public Tidsrom tidsrom = null;
+	public Klima klima = null;
 	
 	/**
 	 * @param args
@@ -41,6 +42,16 @@ public class SimuleringsMotor extends SimulatorBase {
 	{
 		SimuleringsMotor.getSimuleringsMotor().tidsrom = tidsrom;
 	}
+	
+	public static Klima getKlima()
+	{
+		return SimuleringsMotor.getSimuleringsMotor().klima;
+	}
+	
+	public static void setKlima(Klima klima)
+	{
+		SimuleringsMotor.getSimuleringsMotor().klima = klima;
+	}	
 
 	/*
 	 * Setter opp alle objekter/klasser og kjører simuleringen.

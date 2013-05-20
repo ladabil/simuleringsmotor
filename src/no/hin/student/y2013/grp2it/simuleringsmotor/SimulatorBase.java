@@ -98,12 +98,16 @@ public class SimulatorBase {
 							// Sjekk om vi er ett "root+1"-element (dvs rett under <simulering>)
 							if ( isRoot = true )
 							{
-								System.out.println("Root for tag: " + currentNode.getNodeName());
-								
 								// Spesialhåndtering av tidsrom - legge denne til på root av simuleringsmotoret
 								if ( currentNode.getNodeName().equalsIgnoreCase("tidsrom") )
 								{
+									System.out.println("Fant Tidsrom-tag (rett under simulering): " + currentNode.getNodeName());
 									SimuleringsMotor.setTidsrom((Tidsrom) tmpSimBase);
+								}
+								else if ( currentNode.getNodeName().equalsIgnoreCase("klima") )
+								{
+									System.out.println("Fant Klima-tag (rett under simulering): " + currentNode.getNodeName());
+									SimuleringsMotor.setKlima((Klima) tmpSimBase);
 								}
 							}
 							

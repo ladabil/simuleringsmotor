@@ -20,6 +20,11 @@ public class Klima extends SimulatorBase {
 		}
 	}
 	
+	public double getTemperatureForTime(long time)
+	{
+		return (-15 + (Math.random() * 40));
+	}
+	
 	public String toString()
 	{
 		StringBuilder str = new StringBuilder();

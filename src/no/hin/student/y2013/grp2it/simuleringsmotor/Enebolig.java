@@ -6,8 +6,10 @@ public class Enebolig extends BygningBase {
 	 */
 	public boolean doBeregning(long startTime, long lengde)
 	{
-		this.energiForbruk = (long) (((1 + (Math.random() * 5)) * this.bruttoAreal));
-		this.energiForbruk += (long) (((1 + (Math.random() * 5)) * this.pRomAreal));
+		double temperatur = SimuleringsMotor.getKlima().getTemperatureForTime(startTime);
+
+		this.energiForbruk = (long) ((((1 + (Math.random() * 5)) * this.bruttoAreal)) * (temperatur / 10));
+		this.energiForbruk += (long) ((((1 + (Math.random() * 5)) * this.pRomAreal)) * (temperatur / 10));
 		
 		return true;
 	}
