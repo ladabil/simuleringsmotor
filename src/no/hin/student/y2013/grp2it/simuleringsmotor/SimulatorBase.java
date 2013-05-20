@@ -6,13 +6,15 @@ import org.w3c.dom.NodeList;
  * Mai 2013 - Gruppe 2 IT
  */
 
-public class SimulatorBase {
+abstract public class SimulatorBase {
 	private NodeList nodeList;
 
 	public SimulatorBase()
 	{
 		this.nodeList = null;
 	}
+	
+	abstract public double getBeregning();
 	
 	public void setXMLNodeList(NodeList nodeList) {
 		  
