@@ -97,7 +97,7 @@ public class SimulatorBase {
 	
 	public void parseXMLNodeElement(Node node)
 	{
-		System.out.println("parseXMLNodeElement(Node node): Not implemented in SimulatorBase");
+		System.out.println("-- parseXMLNodeElement(Node node): Unhandled tag: " + node.getNodeName());
 	}
 	
 	
