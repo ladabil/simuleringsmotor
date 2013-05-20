@@ -6,7 +6,7 @@ import org.w3c.dom.NodeList;
  * Mai 2013 - Gruppe 2 IT
  */
 
-abstract public class SimulatorBase {
+public class SimulatorBase {
 	private NodeList nodeList;
 
 	public SimulatorBase()
@@ -14,7 +14,10 @@ abstract public class SimulatorBase {
 		this.nodeList = null;
 	}
 	
-	abstract public double getBeregning();
+	public double getBeregning()
+	{
+		return 0.0;
+	}
 	
 	public void setXMLNodeList(NodeList nodeList) {
 		  
