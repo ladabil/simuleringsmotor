@@ -1,6 +1,7 @@
 package no.hin.student.y2013.grp2it.simuleringsmotor;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.w3c.dom.NamedNodeMap;
@@ -13,8 +14,10 @@ import org.w3c.dom.NodeList;
 
 public class SimulatorBase {
 	public static final String packageName = "no.hin.student.y2013.grp2it.simuleringsmotor";
-	private NodeList nodeList;
+	
+	protected NodeList nodeList;
 	protected List<SimulatorBase> simulatorBaseList = new ArrayList<SimulatorBase>();
+	protected List<SimuleringsResultat> simulatorResultList = new ArrayList<SimuleringsResultat>();
 	
 	protected double energiForbruk = 0;
 
@@ -160,4 +163,68 @@ public class SimulatorBase {
 		
 		return true;
 	}
+	
+	/*
+	 * Oppretter simuleringsresultat-objekter for alle tidspunkter i simuleringen..
+	 */
+	public void setupSimuleringsResultat()
+	{
+		if ( !this.simulatorResultList.isEmpty() )
+		{
+			this.simulatorResultList.clear();
+		}
+		
+		for ( long i=SimuleringsMotor.getTidsrom().getStartDateTime().getTime();i<SimuleringsMotor.getTidsrom().getEndDateTime().getTime();i+=SimuleringsMotor.getTidsrom().getOpplosningInMs())
+		{
+			System.out.println("setter opp for i=" + i);
+			
+			this.simulatorResultList.add(new SimuleringsResultat(i, SimuleringsMotor.getTidsrom().getOpplosningInMs()));
+		}
+	}
+	
+	/*
+	 * henter fram simuleringsresultatet vi ønsker
+	 * ut fra time (starttid)
+	 */
+	public SimuleringsResultat findSimuleringsResultatByTime(long timeAsLong)
+	{
+		Iterator<SimuleringsResultat> srIt = simulatorResultList.iterator();
+		
+		while (srIt.hasNext() )
+		{
+			SimuleringsResultat tmpSimRes=(SimuleringsResultat)srIt.next();
+			
+			if ( tmpSimRes.getStartDateTime().getTime() == timeAsLong )
+			{
+				return tmpSimRes;
+			}
+		}
+		
+		return null;
+	}
+	
+
+	/*
+	 * Printer simulatorResult - for debugging 
+	 * 
+	 */
+	public void printSimulatorResult()
+	{
+		Iterator<SimuleringsResultat> srIt = simulatorResultList.iterator();
+		
+		System.out.format("/----------------------------- printSimulatorResult() ---------------------------------\\\n", "StartTime", "opplos.","sim", "Verdi");
+		System.out.format("| %-84s |\n", getClass().getName());
+		System.out.format("+--------------------------------------------------------------------------------------+\n", "StartTime", "opplos.","sim", "Verdi");
+		System.out.format("| %30s | %9s | %6s | %30s |\n", "StartTime", "opplos.","sim", "Energiforbuk i perioden");
+		System.out.format("+--------------------------------------------------------------------------------------+\n", "StartTime", "opplos.","sim", "Verdi");
+		
+		while (srIt.hasNext() )
+		{
+			SimuleringsResultat tmpSimRes=(SimuleringsResultat)srIt.next();
+
+			System.out.format("| %30s | %9d | %6b | %30.1f |\n", tmpSimRes.getStartDateTime(), tmpSimRes.getLength(), tmpSimRes.isSimulated(), tmpSimRes.getEnergiForbruk());
+		}
+		
+		System.out.format("\\--------------------------------------------------------------------------------------/\n", "StartTime", "opplos.","sim", "Verdi");
+	}	
 }

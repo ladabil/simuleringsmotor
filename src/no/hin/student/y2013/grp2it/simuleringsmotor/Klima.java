@@ -22,7 +22,11 @@ public class Klima extends SimulatorBase {
 	
 	public double getTemperatureForTime(long time)
 	{
-		return (-15 + (Math.random() * 40));
+		double temp = (-15 + (Math.random() * 40));
+		
+		System.out.println("Temperatur: " + temp);
+		
+		return temp;
 	}
 	
 	public String toString()

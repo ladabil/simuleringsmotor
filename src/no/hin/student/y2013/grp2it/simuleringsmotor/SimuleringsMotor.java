@@ -70,7 +70,9 @@ public class SimuleringsMotor extends SimulatorBase {
 			System.exit(-2);
 		}
 		
-		long energiForbruk = 0, curEnergiForbruk = 0;
+		setupSimuleringsResultat();
+		
+		double energiForbruk = 0, curEnergiForbruk = 0;
 		
 		for ( long i=this.tidsrom.getStartDateTime().getTime();i<this.tidsrom.getEndDateTime().getTime();i+=this.tidsrom.getOpplosningInMs())
 		{
@@ -83,6 +85,8 @@ public class SimuleringsMotor extends SimulatorBase {
 		}
 		
 		System.out.println("Energiforbruk for perioden: " + energiForbruk);
+		
+		printSimulatorResult();
 	}
 	
 	/*
@@ -90,10 +94,11 @@ public class SimuleringsMotor extends SimulatorBase {
 	 * 
 	 * lengde er i ms
 	 */
-	public long getEnergiForbrukForPeriode(long startTime, long lengde)
+	public double getEnergiForbrukForPeriode(long startTime, long lengde)
 	{
-		Iterator sbIt = simulatorBaseList.iterator();
-		long energiFobruk = 0;
+		Iterator<SimulatorBase> sbIt = simulatorBaseList.iterator();
+		double energiForbruk = 0;
+		SimuleringsResultat tmpSimRes = null;
 		
 		while (sbIt.hasNext() )
 		{
@@ -101,12 +106,22 @@ public class SimuleringsMotor extends SimulatorBase {
 
 			// Utfør først beregningene
 			tmpSimBase.doBeregning(startTime, lengde);
-
-			// Hent så beregningen
-			energiFobruk += tmpSimBase.getBeregning();
+			
+			energiForbruk += tmpSimBase.getBeregning();
 		}
 		
-		return energiFobruk;
+		System.out.println("energiForbruk: " + energiForbruk + "\n");
+		
+		if ( (tmpSimRes=findSimuleringsResultatByTime(startTime)) != null )
+		{
+			// Hent så beregningen og sett den i resultatet
+			tmpSimRes.setEnergiForbruk(energiForbruk);
+			
+			// Sett at simuleringen er fullført for dette simuleringsresultatet..
+			tmpSimRes.setSimulated(true);
+		}
+
+		return energiForbruk;
 	}
 	
 	public void parseXMLFile()
