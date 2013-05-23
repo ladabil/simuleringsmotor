@@ -58,35 +58,51 @@ public class SimuleringsMotor extends SimulatorBase {
 	 */
 	public void doRun()
 	{
-		System.out.println("Running");
 		
-		parseXMLFile();
+		Klima klima = new Klima();
+		String rawXML = "";
 		
-		System.out.println("Died");
-		
-		if ( this.tidsrom == null )
-		{
-			System.out.println("mangler Tidsrom-objektet.. avbryter simuleringen");
-			System.exit(-2);
+		try {
+			Document doc = klima.getXMLFromEKlima();
+			klima.parseWsKlimaXML(doc.getChildNodes());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		setupSimuleringsResultat();
-		
-		double energiForbruk = 0, curEnergiForbruk = 0;
-		
-		for ( long i=this.tidsrom.getStartDateTime().getTime();i<this.tidsrom.getEndDateTime().getTime();i+=this.tidsrom.getOpplosningInMs())
+		if ( false )
 		{
-			System.out.println("Simulating - i=" + i);
-
-			curEnergiForbruk = getEnergiForbrukForPeriode(i, this.tidsrom.getOpplosningInMs());
+			System.out.println("Running");
+			
+			parseXMLFile();
+			
+			System.out.println("Died");
+			
+			if ( this.tidsrom == null )
+			{
+				System.out.println("mangler Tidsrom-objektet.. avbryter simuleringen");
+				System.exit(-2);
+			}
+			
+			setupSimuleringsResultat();
+			
+			double energiForbruk = 0, curEnergiForbruk = 0;
+			
+			for ( long i=this.tidsrom.getStartDateTime().getTime();i<this.tidsrom.getEndDateTime().getTime();i+=this.tidsrom.getOpplosningInMs())
+			{
+				System.out.println("Simulating - i=" + i);
 	
-			System.out.println("Fobruket dette perioden = " + curEnergiForbruk);
-			energiForbruk += curEnergiForbruk;
+				curEnergiForbruk = getEnergiForbrukForPeriode(i, this.tidsrom.getOpplosningInMs());
+		
+				System.out.println("Fobruket dette perioden = " + curEnergiForbruk);
+				energiForbruk += curEnergiForbruk;
+			}
+			
+			System.out.println("Energiforbruk for perioden: " + energiForbruk);
+			
+			printSimulatorResult();
+			
 		}
-		
-		System.out.println("Energiforbruk for perioden: " + energiForbruk);
-		
-		printSimulatorResult();
 	}
 	
 	/*
