@@ -25,7 +25,7 @@ public class Tidsrom extends SimulatorBase {
 	
 	public void parseXMLNodeElement(Node node)
 	{
-		SimpleDateFormat parserSDF=new SimpleDateFormat("yyyy-mm-dd HH:mm:ss zzz");
+		SimpleDateFormat parserSDF=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss zzz");
 		
 		if ( node.getNodeName().equalsIgnoreCase("opplosning") )
 		{

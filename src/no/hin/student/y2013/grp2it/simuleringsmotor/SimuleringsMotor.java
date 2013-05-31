@@ -1,6 +1,7 @@
 package no.hin.student.y2013.grp2it.simuleringsmotor;
 
 import java.io.File;
+import java.util.Date;
 import java.util.Iterator;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -58,50 +59,46 @@ public class SimuleringsMotor extends SimulatorBase {
 	 */
 	public void doRun()
 	{
+		System.out.println("Running");
+		
+		parseXMLFile();
+		
+		System.out.println("Died");
+		
+		if ( this.tidsrom == null )
+		{
+			System.out.println("mangler Tidsrom-objektet.. avbryter simuleringen");
+			System.exit(-2);
+		}
+		
+		setupSimuleringsResultat();
+		
+		double energiForbruk = 0, curEnergiForbruk = 0;
+		
+		for ( long i=this.tidsrom.getStartDateTime().getTime();i<this.tidsrom.getEndDateTime().getTime();i+=this.tidsrom.getOpplosningInMs())
+		{
+			System.out.println("Simulating - i=" + i);
+
+			curEnergiForbruk = getEnergiForbrukForPeriode(i, this.tidsrom.getOpplosningInMs());
+	
+			System.out.println("Fobruket dette perioden = " + curEnergiForbruk);
+			energiForbruk += curEnergiForbruk;
+		}
+		
+		System.out.println("Energiforbruk for perioden: " + energiForbruk);
+		
+		printSimulatorResult();
+		
 		
 		Klima klima = new Klima();
 		String rawXML = "";
 		
 		try {
 			Document doc = klima.getXMLFromEKlima();
-			klima.parseWsKlimaXML(doc.getChildNodes());
+			klima.parseWsKlimaXML(doc.getChildNodes(),null);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		if ( false )
-		{
-			System.out.println("Running");
-			
-			parseXMLFile();
-			
-			System.out.println("Died");
-			
-			if ( this.tidsrom == null )
-			{
-				System.out.println("mangler Tidsrom-objektet.. avbryter simuleringen");
-				System.exit(-2);
-			}
-			
-			setupSimuleringsResultat();
-			
-			double energiForbruk = 0, curEnergiForbruk = 0;
-			
-			for ( long i=this.tidsrom.getStartDateTime().getTime();i<this.tidsrom.getEndDateTime().getTime();i+=this.tidsrom.getOpplosningInMs())
-			{
-				System.out.println("Simulating - i=" + i);
-	
-				curEnergiForbruk = getEnergiForbrukForPeriode(i, this.tidsrom.getOpplosningInMs());
-		
-				System.out.println("Fobruket dette perioden = " + curEnergiForbruk);
-				energiForbruk += curEnergiForbruk;
-			}
-			
-			System.out.println("Energiforbruk for perioden: " + energiForbruk);
-			
-			printSimulatorResult();
-			
 		}
 	}
 	
