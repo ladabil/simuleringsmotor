@@ -126,8 +126,49 @@ public class Klima extends SimulatorBase {
 	    return null;
 	}
 	
+	/*
+	 * Parse weatherElement
+	 * 
+	 * <item xsi:type="ns2:no_met_metdata_WeatherElement">
+	 * 		<id xsi:type="xsd:string">TAX</id>
+	 * 		<quality xsi:type="xsd:int">2</quality>
+	 * 		<value xsi:type="xsd:string">6.4</value>
+	 * </item>
+	 * 
+	 */
+	public boolean parseWsKlimaXMLWeatherElement(NodeList nodeList, Date fromDate)
+	{
+		for (int count = 0; count < nodeList.getLength(); count++) {
+			  
+			Node currentNode = nodeList.item(count);
+			if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
+				System.out.println("\nNode Name =" + currentNode.getNodeName() + " [OPEN]");
+		 
+				if ( currentNode.getNodeName().equalsIgnoreCase("id") )
+				{
+					
+					
+				}
+				else if ( currentNode.getNodeName().equalsIgnoreCase("quality") )
+				{
+					
+					
+				}
+				else if ( currentNode.getNodeName().equalsIgnoreCase("value") )
+				{
+					
+					
+				}
+			}	
+		}
+		
+		return true;
+	}
+	
 	public boolean parseWsKlimaXML(NodeList nodeList, Date fromDate)
 	{
+		KlimaData kd = null;
+		
 		for (int count = 0; count < nodeList.getLength(); count++) {
 			  
 			Node currentNode = nodeList.item(count);
@@ -143,6 +184,19 @@ public class Klima extends SimulatorBase {
 					{
 						parseWsKlimaXML(currentNode.getChildNodes(), fromDate);
 					}
+					else
+					{
+						kd = findKlimaDataByTime(fromDate.getTime());
+					}
+					
+					if ( kd != null )
+					{
+						if ( currentNode.getNodeName().equalsIgnoreCase("weatherElement") )
+						{
+							kd.parseWeatherElement(currentNode.getChildNodes());
+							continue;
+						}
+					}
 				}
 				
 				// Sjekk om vi har attributter
@@ -152,6 +206,20 @@ public class Klima extends SimulatorBase {
 					
 					for (int i = 0; i < nodeMap.getLength(); i++) {
 						Node node = nodeMap.item(i);
+						
+						// Location ID
+						if ( kd != null && currentNode.getNodeName().equalsIgnoreCase("id") && node.getNodeValue().equalsIgnoreCase("xsd:int") )
+						{
+							if ( Integer.parseInt(currentNode.getTextContent()) != this.getMalestasjonsnr() )
+							{
+								System.out.println("\nWrong Malestasjonsnr " + currentNode.getTextContent() + " != " + this.getMalestasjonsnr());
+								return false;
+							}
+							else
+							{
+								System.out.println("\nCorrect Malestasjonsnr " + currentNode.getTextContent() + " == " + this.getMalestasjonsnr());
+							}
+						}
 
 						// Hvis attributten heter type og verdien er class, last inn klassen og fortsett prosesseringen herfra
 						if ( node.getNodeName().equalsIgnoreCase("xsi:type") && node.getNodeValue().equalsIgnoreCase("ns2:no_met_metdata_TimeStamp"))
@@ -170,7 +238,7 @@ public class Klima extends SimulatorBase {
 								System.out.println("fromDate      : " + fromDate);
 								System.out.println("------------------------------------------------");
 	
-								KlimaData kd = findKlimaDataByTime(fromDate.getTime());
+								kd = findKlimaDataByTime(fromDate.getTime());
 								
 								if ( kd == null )
 								{
@@ -190,9 +258,12 @@ public class Klima extends SimulatorBase {
 						
 						if ( fromDate != null )
 						{
+								
 							if ( node.getNodeName().equalsIgnoreCase("xsi:type") && node.getNodeValue().equalsIgnoreCase("ns2:no_met_metdata_WeatherElement"))
 							{
-							
+								kd.parseWeatherElement(currentNode.getChildNodes());
+
+//								parseWsKlimaXMLWeatherElement(currentNode.getChildNodes(), fromDate);
 							}
 							else if ( node.getNodeName().equalsIgnoreCase("xsi:type") && node.getNodeValue().equalsIgnoreCase("ns2:no_met_metdata_Location"))
 							{
