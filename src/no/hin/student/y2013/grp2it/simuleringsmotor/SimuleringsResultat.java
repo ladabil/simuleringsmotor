@@ -7,6 +7,7 @@ public class SimuleringsResultat extends SimulatorBase {
 	private Date startDateTime = null;
 	private long length = 0;
 	private double energiForbruk = 0;
+	private double varmetap = 0; //***J***
 	
 	public SimuleringsResultat(long startTimeAsLong, long length)
 	{
@@ -40,5 +41,13 @@ public class SimuleringsResultat extends SimulatorBase {
 
 	public void setEnergiForbruk(double energiForbruk) {
 		this.energiForbruk = energiForbruk;
+	}
+	
+	public double getVarmetap() { //***J***
+		return varmetap;
+	}
+	
+	public void setVarmetap(double varmetap) { //***J***
+		this.varmetap = varmetap;
 	}
 }

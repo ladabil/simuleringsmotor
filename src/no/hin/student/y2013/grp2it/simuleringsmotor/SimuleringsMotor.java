@@ -14,6 +14,7 @@ public class SimuleringsMotor extends SimulatorBase {
 	static SimuleringsMotor simMotor = null;
 	public Tidsrom tidsrom = null;
 	public Klima klima = null;
+	public Familie familie = null;
 	
 	/**
 	 * @param args
@@ -52,6 +53,16 @@ public class SimuleringsMotor extends SimulatorBase {
 	public static void setKlima(Klima klima)
 	{
 		SimuleringsMotor.getSimuleringsMotor().klima = klima;
+	}	
+	
+	public static Familie getFamilie()
+	{
+		return SimuleringsMotor.getSimuleringsMotor().familie;
+	}
+	
+	public static void setFamilie(Familie familie)
+	{
+		SimuleringsMotor.getSimuleringsMotor().familie = familie;
 	}	
 
 	/*

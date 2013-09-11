@@ -9,7 +9,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /*
- * Mai 2013 - Gruppe 2 IT
+ * 11/09/2013 - Gruppe 2 IT
  */
 
 public class SimulatorBase {
@@ -20,16 +20,24 @@ public class SimulatorBase {
 	protected List<SimuleringsResultat> simulatorResultList = new ArrayList<SimuleringsResultat>();
 	
 	protected double energiForbruk = 0;
-
+	protected double varmetap = 0; //***J***
+	
 	public SimulatorBase()
 	{
 		this.nodeList = null;
 		this.energiForbruk = 0;
+		this.varmetap = 0; //***J***
 	}
 	
 	public double getBeregning()
 	{
 		return this.energiForbruk;
+	}
+	
+	public double getVarmetap() //***J***
+	{
+		return this.varmetap;
+	
 	}
 	
 	// Setter nodelisten (noder i XML-filen som tilhører meg..)
@@ -112,6 +120,11 @@ public class SimulatorBase {
 									System.out.println("Fant Klima-tag (rett under simulering): " + currentNode.getNodeName());
 									SimuleringsMotor.setKlima((Klima) tmpSimBase);
 								}
+								else if ( currentNode.getNodeName().equalsIgnoreCase("familie") )
+								{
+									System.out.println("Fant Familie-tag (rett under simulering): " + currentNode.getNodeName());
+									SimuleringsMotor.setFamilie((Familie) tmpSimBase);
+								}
 							}
 							
 							System.out.println(tmpSimBase);
@@ -160,7 +173,7 @@ public class SimulatorBase {
 	{
 		this.energiForbruk = 0;
 		this.energiForbruk = (long) (1 + (Math.random() * 3000));
-		
+
 		return true;
 	}
 	
@@ -212,19 +225,19 @@ public class SimulatorBase {
 	{
 		Iterator<SimuleringsResultat> srIt = simulatorResultList.iterator();
 		
-		System.out.format("/----------------------------- printSimulatorResult() ---------------------------------\\\n", "StartTime", "opplos.","sim", "Verdi");
+		System.out.format("/----------------------------- printSimulatorResult() ---------------------------------\\\n", "StartTime", "opplos.","sim", "Verdi", "Varmetap");
 		System.out.format("| %-84s |\n", getClass().getName());
-		System.out.format("+--------------------------------------------------------------------------------------+\n", "StartTime", "opplos.","sim", "Verdi");
-		System.out.format("| %30s | %9s | %6s | %30s |\n", "StartTime", "opplos.","sim", "Energiforbuk i perioden");
-		System.out.format("+--------------------------------------------------------------------------------------+\n", "StartTime", "opplos.","sim", "Verdi");
+		System.out.format("+--------------------------------------------------------------------------------------+\n", "StartTime", "opplos.","sim", "Verdi", "Varmetap");
+		System.out.format("| %30s | %9s | %6s | %30s | &30s |\n", "StartTime", "opplos.","sim", "Energiforbuk i perioden", "Varmetap i perioden");
+		System.out.format("+--------------------------------------------------------------------------------------+\n", "StartTime", "opplos.","sim", "Verdi", "Varmetap");
 		
 		while (srIt.hasNext() )
 		{
 			SimuleringsResultat tmpSimRes=(SimuleringsResultat)srIt.next();
 
-			System.out.format("| %30s | %9d | %6b | %30.1f |\n", tmpSimRes.getStartDateTime(), tmpSimRes.getLength(), tmpSimRes.isSimulated(), tmpSimRes.getEnergiForbruk());
+			System.out.format("| %30s | %9d | %6b | %30.1f | %30.1f |\n", tmpSimRes.getStartDateTime(), tmpSimRes.getLength(), tmpSimRes.isSimulated(), tmpSimRes.getEnergiForbruk(), tmpSimRes.getVarmetap() /* ***J*** */);
 		}
 		
-		System.out.format("\\--------------------------------------------------------------------------------------/\n", "StartTime", "opplos.","sim", "Verdi");
+		System.out.format("\\--------------------------------------------------------------------------------------/\n", "StartTime", "opplos.","sim", "Verdi", "Varmetap");
 	}	
 }

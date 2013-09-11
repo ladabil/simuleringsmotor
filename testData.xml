@@ -3,21 +3,30 @@
 	<Enebolig type="class">
 		<bruttoAreal>200</bruttoAreal>
 		<pRomAreal>100</pRomAreal>
+		<byggstandard>1985</byggstandard>
+		<ytterveggAreal>200</ytterveggAreal>
+		<yttertakAreal>200</yttertakAreal>
+		<vinduDorAreal>20</vinduDorAreal>
+		<luftVolum>400</luftVolum>
 		<Varmetap type="class">
-			<isolasjonsTykkelse>10</isolasjonsTykkelse>
+					
 		</Varmetap>
 	</Enebolig>
-	<Familie  type="class">
-		<Person type="class">
+	<Familie type="class">
+		<personAlder>27</personAlder>
+		<antallPersoner>2</antallPersoner>
 
-		</Person>
 	</Familie>
+	<ForbrukVann type="class">
+		<priBoilerSize>200</priBoilerSize>
+		<priBoilerPower>1500</priBoilerPower>
+	</ForbrukVann>
 	<Klima type="class">
-		<sone>1</sone>
+	<sone>1</sone>
 	</Klima>
 	<Tidsrom type="class">
 		<startDateTime>2012-05-19 10:00:00 CET</startDateTime>
-		<endDateTime>2012-05-23 10:00:00 CET</endDateTime>
+		<endDateTime>2012-05-19 16:00:00 CET</endDateTime>
 		<opplosning>3600</opplosning>
 </Tidsrom>
 </simulering>
