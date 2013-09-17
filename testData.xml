@@ -8,10 +8,17 @@
 		<yttertakAreal>200</yttertakAreal>
 		<vinduDorAreal>20</vinduDorAreal>
 		<luftVolum>400</luftVolum>
-		<Varmetap type="class">
-					
-		</Varmetap>
+
 	</Enebolig>
+	<Varmetap type="class">
+		<bruttoAreal>200</bruttoAreal>
+		<pRomAreal>100</pRomAreal>
+		<byggstandard>1985</byggstandard>
+		<ytterveggAreal>200</ytterveggAreal>
+		<yttertakAreal>200</yttertakAreal>
+		<vinduDorAreal>20</vinduDorAreal>
+		<luftVolum>400</luftVolum>			
+		</Varmetap>
 	<Familie type="class">
 		<personAlder>27</personAlder>
 		<antallPersoner>2</antallPersoner>
