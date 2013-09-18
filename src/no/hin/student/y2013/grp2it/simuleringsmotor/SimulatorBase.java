@@ -225,19 +225,19 @@ public class SimulatorBase {
 	{
 		Iterator<SimuleringsResultat> srIt = simulatorResultList.iterator();
 		
-		System.out.format("/----------------------------- printSimulatorResult() ---------------------------------\\\n", "StartTime", "opplos.","sim", "Verdi", "Varmetap");
+		System.out.format("/----------------------------- printSimulatorResult() ---------------------------------\\\n", "StartTime", "opplos.","sim", "Verdi");
 		System.out.format("| %-84s |\n", getClass().getName());
-		System.out.format("+--------------------------------------------------------------------------------------+\n", "StartTime", "opplos.","sim", "Verdi", "Varmetap");
-		System.out.format("| %30s | %9s | %6s | %30s | &30s |\n", "StartTime", "opplos.","sim", "Energiforbuk i perioden", "Varmetap i perioden");
-		System.out.format("+--------------------------------------------------------------------------------------+\n", "StartTime", "opplos.","sim", "Verdi", "Varmetap");
+		System.out.format("+--------------------------------------------------------------------------------------+\n", "StartTime", "opplos.","sim", "Verdi");
+		System.out.format("| %30s | %9s | %6s | %30s |\n", "StartTime", "opplos.","sim", "Energiforbuk i perioden", "Varmetap i perioden");
+		System.out.format("+--------------------------------------------------------------------------------------+\n", "StartTime", "opplos.","sim", "Verdi");
 		
 		while (srIt.hasNext() )
 		{
 			SimuleringsResultat tmpSimRes=(SimuleringsResultat)srIt.next();
 
-			System.out.format("| %30s | %9d | %6b | %30.1f | %30.1f |\n", tmpSimRes.getStartDateTime(), tmpSimRes.getLength(), tmpSimRes.isSimulated(), tmpSimRes.getEnergiForbruk(), tmpSimRes.getVarmetap() /* ***J*** */);
+			System.out.format("| %30s | %9d | %6b | %30.1f |\n", tmpSimRes.getStartDateTime(), tmpSimRes.getLength(), tmpSimRes.isSimulated(), tmpSimRes.getEnergiForbruk(), tmpSimRes.getVarmetap() /* ***J*** */);
 		}
 		
-		System.out.format("\\--------------------------------------------------------------------------------------/\n", "StartTime", "opplos.","sim", "Verdi", "Varmetap");
+		System.out.format("\\--------------------------------------------------------------------------------------/\n", "StartTime", "opplos.","sim", "Verdi");
 	}	
 }

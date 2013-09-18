@@ -92,7 +92,7 @@ public class SimuleringsMotor extends SimulatorBase {
 
 			curEnergiForbruk = getEnergiForbrukForPeriode(i, this.tidsrom.getOpplosningInMs());
 	
-			System.out.println("Fobruket dette perioden = " + curEnergiForbruk);
+			System.out.println("Forbruket denne perioden = " + curEnergiForbruk);
 			energiForbruk += curEnergiForbruk;
 		}
 		
