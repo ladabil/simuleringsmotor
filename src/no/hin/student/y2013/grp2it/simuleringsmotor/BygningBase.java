@@ -11,7 +11,7 @@ public class BygningBase extends SimulatorBase {
 	protected int byggstandard = 0; //***J***
 	protected int ytterveggAreal = 0; //***J***
 	protected int yttertakAreal = 0; //***J***
-	protected int vinduDørAreal = 0; //***J***
+	protected int vinduDorAreal = 0; //***J***
 	protected int luftVolum = 0; //***J***
 	protected int priBoilerSize = 0; //***Rune***
 	protected int priBoilerPower = 0; //***Rune***
@@ -43,7 +43,7 @@ public class BygningBase extends SimulatorBase {
 		}
 		else if ( node.getNodeName().equalsIgnoreCase("vinduDorAreal") ) //***J***
 		{
-			this.vinduDørAreal = Integer.parseInt(node.getTextContent());
+			this.vinduDorAreal = Integer.parseInt(node.getTextContent());
 		}
 		else if ( node.getNodeName().equalsIgnoreCase("luftVolum") ) //***J***
 		{
@@ -82,7 +82,7 @@ public class BygningBase extends SimulatorBase {
 		str.append(String.format("Byggstandard        = %d\n", this.byggstandard)); //***J***
 		str.append(String.format("YtterveggAreal        = %d\n", this.ytterveggAreal)); //***J***
 		str.append(String.format("YttertakAreal        = %d\n", this.yttertakAreal)); //***J***
-		str.append(String.format("vinduDørAreal        = %d\n", this.vinduDørAreal)); //***J***
+		str.append(String.format("vinduDørAreal        = %d\n", this.vinduDorAreal)); //***J***
 		str.append(String.format("LuftVolum        = %d\n", this.luftVolum)); //***J***
 		str.append(String.format("priBoilerSize        = %d\n", this.priBoilerSize)); //***J***
 		str.append(String.format("priBoilerPower        = %d\n", this.priBoilerPower)); //***J***
