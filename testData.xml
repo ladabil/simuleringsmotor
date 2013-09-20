@@ -3,21 +3,18 @@
 	<Enebolig type="class">
 		<bruttoAreal>200</bruttoAreal>
 		<pRomAreal>100</pRomAreal>
+
+
+	</Enebolig>
+	<Varmetap type="class">
+		<bruttoAreal>200</bruttoAreal>
+		<pRomAreal>150</pRomAreal>
 		<byggstandard>1985</byggstandard>
 		<ytterveggAreal>200</ytterveggAreal>
 		<yttertakAreal>200</yttertakAreal>
 		<vinduDorAreal>20</vinduDorAreal>
 		<luftVolum>400</luftVolum>
-
-	</Enebolig>
-	<Varmetap type="class">
-		<bruttoAreal>200</bruttoAreal>
-		<pRomAreal>100</pRomAreal>
-		<byggstandard>1985</byggstandard>
-		<ytterveggAreal>200</ytterveggAreal>
-		<yttertakAreal>200</yttertakAreal>
-		<vinduDorAreal>20</vinduDorAreal>
-		<luftVolum>400</luftVolum>			
+		<onsketTemp>23</onsketTemp>	
 		</Varmetap>
 	<Familie type="class">
 		<personAlder>27</personAlder>

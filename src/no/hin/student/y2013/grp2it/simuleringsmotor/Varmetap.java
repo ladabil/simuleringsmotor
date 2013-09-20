@@ -8,6 +8,7 @@ public class Varmetap extends BygningBase {
 		double temperatur = SimuleringsMotor.getKlima().getTemperatureForTime(startTime);
 		double gjenvinningsgrad = 0, kuldebro = 0, uvegg = 0, utak = 0, uvinduDor = 0, ugulv = 0, lekkasjetall = 0; //Varmetapsverdier (U-verdier)
 		double varmetap = 0;
+		double oppvarmingsbehov = 0;
 		//Angir verdiene i henhold til byggstandard, og beregner varmetapet
 		if (this.byggstandard < 1987) {
 			utak = 0.23;
@@ -53,7 +54,20 @@ public class Varmetap extends BygningBase {
 		}
 
 		this.energiForbruk = varmetap;
-		System.out.format("Varmetap per time: %f\n\n", this.energiForbruk);
+		System.out.format("Varmetap: %f\n\n", this.energiForbruk);
+		
+		//beregning for oppvamingsbehov. Standardtallet for temperatur er satt fra 17 til ønsket temperatur, og algoritmen beregner bare pRomAreal istedet for brutto.
+		oppvarmingsbehov = (this.yttertakAreal*utak)+(this.ytterveggAreal*uvegg)+(this.pRomAreal*ugulv)+(this.vinduDorAreal*uvinduDor)+(kuldebro*this.pRomAreal)+(0.33*lekkasjetall*this.luftVolum*0.07)+(0.33*(this.luftVolum*0.5)*(1-gjenvinningsgrad));
+		if (temperatur<this.onsketTemp){
+			oppvarmingsbehov = oppvarmingsbehov*(this.onsketTemp-temperatur);
+		}
+		//Ved 17 grader og opp er det ikke noe varmetap
+		if (temperatur>=this.onsketTemp){
+			oppvarmingsbehov = 0;
+		}
+		
+		this.energiForbruk = oppvarmingsbehov;
+		System.out.format("Oppvarmingsbehov: %f\n\n", this.energiForbruk);
 		
 		return true;
 	}

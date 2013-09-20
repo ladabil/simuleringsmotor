@@ -13,6 +13,7 @@ public class BygningBase extends SimulatorBase {
 	protected int yttertakAreal = 0; //***J***
 	protected int vinduDorAreal = 0; //***J***
 	protected int luftVolum = 0; //***J***
+	protected int onsketTemp = 0;//***J***
 	protected int priBoilerSize = 0; //***Rune***
 	protected int priBoilerPower = 0; //***Rune***
 	protected int secBoilerSize = 0; //***Rune***
@@ -49,6 +50,10 @@ public class BygningBase extends SimulatorBase {
 		{
 			this.luftVolum = Integer.parseInt(node.getTextContent());
 		}
+		else if ( node.getNodeName().equalsIgnoreCase("onsketTemp") ) //***J***
+		{
+			this.onsketTemp = Integer.parseInt(node.getTextContent());
+		}
 		if ( node.getNodeName().equalsIgnoreCase("priBoilerSize") )	//***Rune***
 		{
 			this.priBoilerSize = Integer.parseInt(node.getTextContent());
@@ -82,11 +87,12 @@ public class BygningBase extends SimulatorBase {
 		str.append(String.format("Byggstandard        = %d\n", this.byggstandard)); //***J***
 		str.append(String.format("YtterveggAreal        = %d\n", this.ytterveggAreal)); //***J***
 		str.append(String.format("YttertakAreal        = %d\n", this.yttertakAreal)); //***J***
-		str.append(String.format("vinduDørAreal        = %d\n", this.vinduDorAreal)); //***J***
+		str.append(String.format("vinduDorAreal        = %d\n", this.vinduDorAreal)); //***J***
 		str.append(String.format("LuftVolum        = %d\n", this.luftVolum)); //***J***
-		str.append(String.format("priBoilerSize        = %d\n", this.priBoilerSize)); //***J***
-		str.append(String.format("priBoilerPower        = %d\n", this.priBoilerPower)); //***J***
-		str.append(String.format("secBoilerSize        = %d\n", this.secBoilerSize)); //***J***
+		str.append(String.format("Onsket temperatur        = %d\n", this.onsketTemp)); //***J***
+		str.append(String.format("priBoilerSize        = %d\n", this.priBoilerSize)); //***Rune***
+		str.append(String.format("priBoilerPower        = %d\n", this.priBoilerPower)); //***Rune***
+		str.append(String.format("secBoilerSize        = %d\n", this.secBoilerSize)); //***Rune***
 		str.append(String.format("----- Type Slutt\n"));
 		
 		return str.toString();
