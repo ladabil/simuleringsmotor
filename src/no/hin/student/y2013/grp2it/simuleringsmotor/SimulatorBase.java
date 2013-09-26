@@ -19,6 +19,8 @@ public class SimulatorBase {
 	protected List<SimulatorBase> simulatorBaseList = new ArrayList<SimulatorBase>();
 	protected List<SimuleringsResultat> simulatorResultList = new ArrayList<SimuleringsResultat>();
 	
+	private boolean showDebug = false;
+	
 	protected double energiForbruk = 0;
 	protected double varmetap = 0; //***J***
 	
@@ -240,4 +242,13 @@ public class SimulatorBase {
 		
 		System.out.format("\\--------------------------------------------------------------------------------------/\n", "StartTime", "opplos.","sim", "Verdi");
 	}	
+	
+
+	public boolean showDebug() {
+		return showDebug;
+	}
+
+	public void setShowDebug(boolean showDebug) {
+		this.showDebug = showDebug;
+	}
 }
