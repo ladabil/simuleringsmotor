@@ -38,5 +38,5 @@
 		<startDateTime>2012-05-19 10:00:00 CET</startDateTime>
 		<endDateTime>2012-06-23 10:00:00 CET</endDateTime>
 		<opplosning>3600</opplosning>
-</Tidsrom>
+	</Tidsrom>
 </simulering>

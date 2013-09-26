@@ -84,7 +84,7 @@ public class SimuleringsMotor extends SimulatorBase {
 		
 		// Last inn klimadata
 		SimuleringsMotor.getKlima().getAndParseEKlima();
-
+		
 		// Sett opp simuleringsresulatet
 
 		setupSimuleringsResultat();
