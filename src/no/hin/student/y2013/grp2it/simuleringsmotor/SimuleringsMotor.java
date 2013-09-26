@@ -82,6 +82,11 @@ public class SimuleringsMotor extends SimulatorBase {
 			System.exit(-2);
 		}
 		
+		// Last inn klimadata
+		SimuleringsMotor.getKlima().getAndParseEKlima();
+
+		// Sett opp simuleringsresulatet
+
 		setupSimuleringsResultat();
 		
 		double energiForbruk = 0, curEnergiForbruk = 0;
@@ -99,18 +104,6 @@ public class SimuleringsMotor extends SimulatorBase {
 		System.out.println("Energiforbruk for perioden: " + energiForbruk);
 		
 		printSimulatorResult();
-		
-		
-		Klima klima = new Klima();
-		String rawXML = "";
-		
-		try {
-			Document doc = klima.getXMLFromEKlima();
-			klima.parseWsKlimaXML(doc.getChildNodes(),null);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	/*
