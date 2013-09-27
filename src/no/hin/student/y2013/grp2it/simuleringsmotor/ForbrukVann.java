@@ -12,8 +12,9 @@ public class ForbrukVann extends BygningBase {
 	//Utfører beregningene
 	public boolean doBeregning(long startTime, long lengde)	
 	{
-		double powerUsageWater = 0, multiplier = 0 , heatLoss = 0, handWash = 0, shower = 0, bath = 0, dishWash = 0, floorWash  = 0;
+		double forbrukVarmtVann = 0, multiplier = 0 , varmeTapVann = 0, handVask = 0, dusj = 0, badekar = 0, oppvask = 0, gulvvask  = 0;
 		
+//		TODO: kalkuler multiplier fra array med alder
 		
 		if (antallPersoner < 1 )
 		{ 
@@ -34,11 +35,11 @@ public class ForbrukVann extends BygningBase {
 				}
 				else if (personAlder >= 13 && personAlder < 25 ) 
 				{
-					multiplier = (multiplier + 0.5);	
+					multiplier = (multiplier + 0.6);	
 				}
 				else if (personAlder >= 25 && personAlder < 65 )
 				{
-					multiplier = (multiplier + 0.4);
+					multiplier = (multiplier + 0.5);
 				}
 				else if (personAlder > 65 )
 				{
@@ -54,41 +55,41 @@ public class ForbrukVann extends BygningBase {
 			
 		if (this.priBoilerSize == 0) {
 			this.energiForbruk = priBoilerPower;
-			heatLoss = 0;
-			handWash = 0.04;		
+			varmeTapVann = 0;
+			handVask = 0.04;		
 		}
 	
 		if (this.priBoilerSize > 0 && this.priBoilerSize < 70) {
 			this.energiForbruk = priBoilerPower;
-			heatLoss = 0.8;
-			handWash = 0.25;		
+			varmeTapVann = 0.8;
+			handVask = 0.25;		
 		}
 	
 		if (this.priBoilerSize > 70 && this.priBoilerSize < 140) {
 			this.energiForbruk = priBoilerPower;
-			heatLoss = 1.2;
-			handWash = 0.25;		
+			varmeTapVann = 1.2;
+			handVask = 0.25;		
 		}
 	
 		if (this.priBoilerSize > 140) {
 			this.energiForbruk = priBoilerPower;
-			heatLoss = 1.9;
-			handWash = 0.25;		
+			varmeTapVann = 1.9;
+			handVask = 0.25;		
 		}
 	
-		 shower = 2.5;
-		 bath = (this.bathtubeSize * 0.04);
-		 dishWash = 3; // Oppvaskmaskin, 60l - 50*C = ca 3 kWh
-		 floorWash = (this.pRomAreal * 0.04); // 100m2 = 50l - 40*C = ca 2 kWh
+		 dusj = 2.5;
+		 badekar = (this.bathtubeSize * 0.04);
+		 oppvask = 3; // Oppvaskmaskin, 60l - 50*C = ca 3 kWh
+		 gulvvask = (this.pRomAreal * 0.04); // 100m2 = 50l - 40*C = ca 2 kWh
 	 
 	 
-		 //beregner forbruk til tappevann 
-		powerUsageWater = (multiplier ) * ( heatLoss ) + ( ((handWash * 4) + shower + (dishWash / 5) + ( floorWash / 7 ) ) ) ;
+		 //beregner forbruk til tappevann (effekt-tap oppvarming + forholdstall familie * (4 håndvask per pers per døgn + 1 dusj per pers per døgn + oppvask hånd hver 5. dag(forhold om oppvaskmaskin hvitevare + 1 gulvvask hver uke) 
+		forbrukVarmtVann = (varmeTapVann) + (multiplier * ((handVask * 4) + dusj + (oppvask / 5) + ( gulvvask / 7 ) ) ) ;
 		
-		this.energiForbruk = powerUsageWater;
+		this.energiForbruk = forbrukVarmtVann;
 		
 		System.out.format("Vann multiplier: %f\n", multiplier);
-		System.out.format("AntallPersoner: %f\n ", antallPersoner);
+		System.out.format("AntallPersoner: %f\n", antallPersoner);
 		System.out.format("Energiforbruk Vann per døgn: %f\n", this.energiForbruk);
 
 		return true;

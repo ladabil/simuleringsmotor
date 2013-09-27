@@ -30,6 +30,8 @@
 		<priBoilerSize>200</priBoilerSize>
 		<priBoilerPower>1500</priBoilerPower>
 	</ForbrukVann>
+	<ForbrukHvitevare type="class">
+	</ForbrukHvitevare>
 	<Klima type="class">
 		<maalestasjon>86600</maalestasjon>
 		<sone>1</sone>

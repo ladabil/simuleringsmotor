@@ -92,7 +92,6 @@ public class BygningBase extends SimulatorBase {
 		str.append(String.format("Onsket temperatur        = %d\n", this.onsketTemp)); //***J***
 		str.append(String.format("priBoilerSize        = %d\n", this.priBoilerSize)); //***Rune***
 		str.append(String.format("priBoilerPower        = %d\n", this.priBoilerPower)); //***Rune***
-		str.append(String.format("secBoilerSize        = %d\n", this.secBoilerSize)); //***Rune***
 		str.append(String.format("----- Type Slutt\n"));
 		
 		return str.toString();
