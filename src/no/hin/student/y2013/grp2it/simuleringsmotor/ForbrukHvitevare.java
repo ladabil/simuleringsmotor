@@ -1,7 +1,7 @@
 package no.hin.student.y2013.grp2it.simuleringsmotor;
 
 /*
- * ForbrukVann - 11/9-2013
+ * ForbrukHvitevare - 28/9-2013
  */
 public class ForbrukHvitevare extends BygningBase {
 
