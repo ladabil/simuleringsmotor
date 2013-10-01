@@ -32,6 +32,8 @@
 	</ForbrukVann>
 	<ForbrukHvitevare type="class">
 	</ForbrukHvitevare>
+	<ForbrukBrunevare type="class">
+	</ForbrukBrunevare>
 	<Klima type="class">
 		<maalestasjon>86600</maalestasjon>
 		<sone>1</sone>
