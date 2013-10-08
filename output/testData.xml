@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<simulering>
+	<Enebolig type="class">
+		<bruttoAreal>200</bruttoAreal>
+		<pRomAreal>100</pRomAreal>
+		<Varmetap type="class">
+			<bruttoAreal>200</bruttoAreal>
+			<pRomAreal>150</pRomAreal>
+			<byggstandard>1985</byggstandard>
+			<ytterveggAreal>200</ytterveggAreal>
+			<yttertakAreal>200</yttertakAreal>
+			<vinduDorAreal>20</vinduDorAreal>
+			<luftVolum>400</luftVolum>
+			<onsketTemp>23</onsketTemp>	
+			</Varmetap>
+		<Soltilskudd type="class">
+		<vinduDorAreal>20</vinduDorAreal>
+		</Soltilskudd>
+	</Enebolig>
+	<Familie type="class">
+		<personAlder>27</personAlder>
+		<antallPersoner>2</antallPersoner>
+		<Person type="class">
+			<Alder>50</Alder>
+			<Kjonn>Kvinne</Kjonn>
+		</Person>
+		<Person type="class">
+			<Alder>60</Alder>
+			<Kjonn>Mann</Kjonn>
+		</Person>
+	</Familie>
+	<ForbrukVann type="class">
+		<priBoilerSize>200</priBoilerSize>
+		<priBoilerPower>1500</priBoilerPower>
+	</ForbrukVann>
+	<ForbrukHvitevare type="class">
+	</ForbrukHvitevare>
+	<ForbrukBrunevare type="class">
+	</ForbrukBrunevare>
+	<Klima type="class">
+		<maalestasjon>86600</maalestasjon>
+		<sone>1</sone>
+	</Klima>
+	<Tidsrom type="class">
+		<startDateTime>2012-05-19 10:00:00 CET</startDateTime>
+		<endDateTime>2012-06-23 10:00:00 CET</endDateTime>
+		<opplosning>3600</opplosning>
+	</Tidsrom>
+</simulering>

@@ -1,6 +1,7 @@
 package no.hin.student.y2013.grp2it.simuleringsmotor;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -15,6 +16,7 @@ public class SimuleringsMotor extends SimulatorBase {
 	public Tidsrom tidsrom = null;
 	public Klima klima = null;
 	public Familie familie = null;
+	private File xmlFile = null;
 	
 	/**
 	 * @param args
@@ -22,12 +24,45 @@ public class SimuleringsMotor extends SimulatorBase {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		simMotor = new SimuleringsMotor();
-		simMotor.doRun();
+		FilMonitor filMonitor = new FilMonitor();
+		filMonitor.doRun();
+		
 	}
+	
+	/*
+	 * Commons Daemon - metoder
+	 */	
+	public void start() {
+		MyLog.log("starting SimuleringsMotor\n");
+
+		FilMonitor filMonitor = new FilMonitor();
+		filMonitor.doRun();
+	}	
+
+	public void stop()
+	{
+		MyLog.log("stopping zhoneProv\n");
+	}
+	
+	public void destroy()
+	{
+		MyLog.log("Destroying zhoneProv\n");
+	}
+	
 	
 	public SimuleringsMotor()
 	{
+		
+	}
+	
+	public void setFile(File file)
+	{
+		xmlFile = file;
+	}
+	
+	public File getFile()
+	{
+		return xmlFile;
 	}
 	
 	public static SimuleringsMotor getSimuleringsMotor()
@@ -64,13 +99,19 @@ public class SimuleringsMotor extends SimulatorBase {
 	{
 		SimuleringsMotor.getSimuleringsMotor().familie = familie;
 	}	
-
+	
 	/*
 	 * Setter opp alle objekter/klasser og kjører simuleringen.
 	 */
 	public void doRun()
 	{
 		System.out.println("Running");
+		
+		if ( getFile() == null ) 
+		{
+			System.err.println("xmlFile er ikke satt!");
+			return;
+		}
 		
 		parseXMLFile();
 		
@@ -144,13 +185,10 @@ public class SimuleringsMotor extends SimulatorBase {
 	public void parseXMLFile()
 	{
 	    try {
-	    	 
-	    	File file = new File("./testData.xml");
-	     
 	    	DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
 	                                 .newDocumentBuilder();
 	     
-	    	Document doc = dBuilder.parse(file);
+	    	Document doc = dBuilder.parse(getFile());
 	     
 	    	System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 	     
@@ -174,5 +212,4 @@ public class SimuleringsMotor extends SimulatorBase {
 	    	System.out.println(e.getMessage());
 	    }
 	}
-
 }
