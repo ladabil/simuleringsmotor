@@ -1,7 +1,7 @@
 package no.hin.student.y2013.grp2it.simuleringsmotor;
 
 /*
- * ForbrukVann - 11/9-2013
+ * ForbrukVann - 08/10-2013
  */
 public class ForbrukVann extends BygningBase {
 
@@ -52,7 +52,7 @@ public class ForbrukVann extends BygningBase {
 
 //		waterMultiplier = multiplier;
 		
-			
+		// Kalkuler verdier avhengig av størrelse varmtvannstank	
 		if (this.priBoilerSize == 0) {
 			this.energiForbruk = priBoilerPower;
 			varmeTapVann = 0;
@@ -76,14 +76,17 @@ public class ForbrukVann extends BygningBase {
 			varmeTapVann = 1.9;
 			handVask = 0.25;		
 		}
-	
+		
+		// Andre faste verdier i kWh	
 		 dusj = 2.5;
 		 badekar = (this.bathtubeSize * 0.04);
-		 oppvask = 3; // Oppvaskmaskin, 60l - 50*C = ca 3 kWh
+		 oppvask = 3; // Oppvaskmaskin utføres av ForbrukBrunevarer, dette er restvasken.
 		 gulvvask = (this.pRomAreal * 0.04); // 100m2 = 50l - 40*C = ca 2 kWh
 	 
 	 
-		 //beregner forbruk til tappevann (effekt-tap oppvarming + forholdstall familie * (4 håndvask per pers per døgn + 1 dusj per pers per døgn + oppvask hånd hver 5. dag(forhold om oppvaskmaskin hvitevare + 1 gulvvask hver uke) 
+		 //beregner forbruk til tappevann 
+		 // (effekt-tap oppvarming + forholdstall familie * (4 håndvask per pers per døgn + 1 dusj per pers per døgn + 
+		 // oppvask hånd hver 5. dag(forhold om oppvaskmaskin hvitevare + 1 gulvvask hver uke) 
 		forbrukVarmtVann = (varmeTapVann) + (multiplier * ((handVask * 4) + dusj + (oppvask / 5) + ( gulvvask / 7 ) ) ) ;
 		
 		this.energiForbruk = forbrukVarmtVann;

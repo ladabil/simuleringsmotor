@@ -78,8 +78,8 @@ public class ForbrukHvitevare extends BygningBase {
 		
 		this.energiForbruk = (forbrukHvitevare / 1000); // omgjøring til kWh
 		
-		System.out.format("hvitevarer multiplier: %f\n", multiplier);
 		System.out.format("AntallPersoner: %f\n", antallPersoner);
+		System.out.format("hvitevarer multiplier: %f\n", multiplier);
 		System.out.format("Energiforbruk hvitevarer per døgn: %f\n", this.energiForbruk);
 
 		return true;

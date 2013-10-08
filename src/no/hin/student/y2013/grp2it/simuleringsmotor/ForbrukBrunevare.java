@@ -1,7 +1,7 @@
 package no.hin.student.y2013.grp2it.simuleringsmotor;
 
 /*
- * ForbrukBrunevare - 01/10-2013
+ * ForbrukBrunevare - 08/10-2013
  */
 public class ForbrukBrunevare extends BygningBase {
 
@@ -29,7 +29,7 @@ public class ForbrukBrunevare extends BygningBase {
 		internett = 9;
 		
 		
-//		TODO: foreach løkke
+//		TODO: foreach løkke. Tilpassing for sammensatt familie (1 pers = familie med 1) og utregning
 		if (this.antallPersoner > 1){
 			if (this.personAlder < 65) { // Mer enn en person tilsier familie
 				forbrukBrunevare = (
