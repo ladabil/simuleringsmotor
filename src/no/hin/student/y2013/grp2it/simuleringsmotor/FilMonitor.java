@@ -9,16 +9,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class FilMonitor {
-	Path xmlInputPath = null;
-	Path xmlOutputPath = null;
+	Path xmlNewPath = null;
+	Path xmlDonePath = null;
+	Path xmlResultPath = null;
 	
 	public FilMonitor()
 	{
-		xmlInputPath = Paths.get(".\\new\\");
-//		xmlInputPath = Paths.get("/home/gruppe2/new/");
+		xmlNewPath = Paths.get(".\\new\\");
+		xmlNewPath = Paths.get("/home/gruppe2/new/");
 		
-		xmlOutputPath = Paths.get(".\\output\\");
-//		xmlOutputPath = Paths.get("/home/gruppe2/done/");
+		xmlDonePath = Paths.get(".\\output\\");
+		xmlDonePath = Paths.get("/home/gruppe2/done/");
+
+		xmlResultPath = Paths.get(".\\output\\");
+		xmlResultPath = Paths.get("/home/gruppe2/output/");
 	}
 
 	/*
@@ -45,14 +49,17 @@ public class FilMonitor {
 	public void checkForNewFiles()
 	{
 		System.out.printf("Ser etter nye filer..\n");
+		File outputFile = null;
 		
-		try ( DirectoryStream<Path> stream = Files.newDirectoryStream(xmlInputPath)) {
+		
+		try ( DirectoryStream<Path> stream = Files.newDirectoryStream(xmlNewPath)) {
 		    for (Path file: stream) {
+		    	outputFile = new File(xmlResultPath.toFile().getPath()  + "/" + file.toFile().getName() + ".csv");
 //		        System.out.println(file.getFileName());
 		        
-		        if ( runSimuleringsMotor(file) )
+		        if ( runSimuleringsMotor(file, outputFile) )
 		        {
-		        	File tmpFile = new File(xmlOutputPath.toFile().getPath() + "/" + file.toFile().getName()); 
+		        	File tmpFile = new File(xmlDonePath.toFile().getPath() + "/" + file.toFile().getName()); 
 		        	
 //		        	System.err.printf("Filename: %s\n", tmpFile.getAbsolutePath(), tmpFile.getName());
 //		        	System.exit(2);
@@ -72,12 +79,17 @@ public class FilMonitor {
 	/*
 	 * Start simulering
 	 */
-	public boolean runSimuleringsMotor(Path file)
+	public boolean runSimuleringsMotor(Path file, File csvFile)
 	{
 		System.out.println("Kjører simulering..");
 		SimuleringsMotor.simMotor = new SimuleringsMotor();
 		SimuleringsMotor.simMotor.setFile(file.toFile());
 		SimuleringsMotor.simMotor.doRun();
+		
+		/*
+		 * Lagre resultatatet
+		 */
+		SimuleringsMotor.simMotor.saveSimulatorResult(csvFile);
 		
 		SimuleringsMotor.simMotor = null;
 		return true;

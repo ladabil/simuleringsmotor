@@ -1,5 +1,9 @@
 package no.hin.student.y2013.grp2it.simuleringsmotor;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -248,6 +252,31 @@ public class SimulatorBase {
 		}
 		
 		System.out.format("\\--------------------------------------------------------------------------------------/\n", "StartTime", "opplos.","sim", "Verdi");
+	}
+	
+	/*
+	 * Lagrere simuleringsresultatet til CSV
+	 */
+	public boolean saveSimulatorResult(File file)
+	{
+		Iterator<SimuleringsResultat> srIt = simulatorResultList.iterator();
+		
+		try {
+			BufferedWriter output = new BufferedWriter(new FileWriter(file));
+			output.write(String.format("startTimeAsLong;startTime;opplos;sim;forbruk;varmetap\n"));
+
+			while (srIt.hasNext() )
+			{
+				SimuleringsResultat tmpSimRes=(SimuleringsResultat)srIt.next();
+				output.write(String.format("%d;%s;%d;%b;%f;%f\n", tmpSimRes.getStartDateTime().getTime(), tmpSimRes.getStartDateTime(), tmpSimRes.getLength(), tmpSimRes.isSimulated(), tmpSimRes.getEnergiForbruk(), tmpSimRes.getVarmetap()));
+			}
+			
+			output.close();
+			return true;
+		} catch ( IOException e ) {
+			e.printStackTrace();
+			return false;
+		}
 	}	
 	
 
