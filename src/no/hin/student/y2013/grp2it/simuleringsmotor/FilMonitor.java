@@ -14,8 +14,11 @@ public class FilMonitor {
 	
 	public FilMonitor()
 	{
-		xmlInputPath = Paths.get(".\\input\\");
-		xmlOutputPath = Paths.get(".\\output\\");
+//		xmlInputPath = Paths.get(".\\input\\");
+		xmlInputPath = Paths.get("/home/gruppe2/new/");
+		
+//		xmlOutputPath = Paths.get(".\\output\\");
+		xmlOutputPath = Paths.get("/home/gruppe2/done/");
 	}
 
 	/*
