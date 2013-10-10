@@ -96,9 +96,12 @@ public class SimulatorBase {
 							
 							if ( tmpSimBase == null )
 							{
+								System.out.println("tmpSimBase == null, continue");
 								continue;
 							}
 								
+							System.out.println("tmpSimBase != null");
+
 							if (currentNode.hasChildNodes()) {
 								tmpSimBase.setXMLNodeList(currentNode.getChildNodes());
 							}
@@ -161,10 +164,14 @@ public class SimulatorBase {
 			loadedClass = Class.forName(fullClassName);
 			baseClass = (SimulatorBase) loadedClass.newInstance();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(-1);
 		}
 		
+		System.out.println("Here 4");
+
 		return baseClass;
 	}	
 	
