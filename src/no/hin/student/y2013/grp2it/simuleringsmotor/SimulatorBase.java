@@ -184,7 +184,7 @@ public class SimulatorBase {
 	 */
 	public boolean doBeregning(long startTime, long lengde)
 	{
-		this.energiForbruk = 0;
+//		this.energiForbruk = 0;
 //		this.energiForbruk = (long) (1 + (Math.random() * 3000));
 
 		return true;
