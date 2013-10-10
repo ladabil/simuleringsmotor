@@ -129,18 +129,9 @@ public class SimuleringsMotor extends SimulatorBase {
 		setupSimuleringsResultat();
 		
 		double energiForbruk = 0, curEnergiForbruk = 0;
-		SimuleringsResultat simRes = null;
 		
 		for ( long i=this.tidsrom.getStartDateTime().getTime();i<this.tidsrom.getEndDateTime().getTime();i+=this.tidsrom.getOpplosningInMs())
 		{
-			simRes = findSimuleringsResultatByTime(this.tidsrom.getEndDateTime().getTime());
-			
-			if ( simRes == null )
-			{
-				System.out.println("SimRes == null, continuing for i=" + i);
-				continue;
-			}
-			
 			System.out.println("Simulating - i=" + i);
 
 			curEnergiForbruk = getEnergiForbrukForPeriode(i, this.tidsrom.getOpplosningInMs());
