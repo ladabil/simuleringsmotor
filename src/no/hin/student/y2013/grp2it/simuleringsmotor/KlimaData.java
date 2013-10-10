@@ -282,7 +282,7 @@ public class KlimaData extends SimulatorBase {
 		this.temperature = temperature;
 	}
 	
-	public double getTemperatureWithoutOffest()
+	public double getTemperatureWithoutOffset()
 	{
 		return temperature;
 	}

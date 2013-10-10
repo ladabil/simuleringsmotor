@@ -61,11 +61,15 @@ public class Klima extends SimulatorBase {
 	 */
 	public double getTemperatureForTime(long time)
 	{
-		double temp = (-15 + (Math.random() * 40));
+		KlimaData kd = findKlimaDataByTime(time);
 		
-		System.out.println("Temperatur: " + temp);
+		if ( kd == null ) 
+		{
+			System.out.println("Fant ikke klimadata for " + time);
+			return 0.0f;
+		}
 		
-		return temp;
+		return kd.getTemperature();
 	}
 	
 	public String toString()
