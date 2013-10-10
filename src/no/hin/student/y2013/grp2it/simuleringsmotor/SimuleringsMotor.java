@@ -115,8 +115,6 @@ public class SimuleringsMotor extends SimulatorBase {
 		
 		parseXMLFile();
 		
-		System.out.println("Died");
-		
 		if ( this.tidsrom == null )
 		{
 			System.out.println("mangler Tidsrom-objektet.. avbryter simuleringen");
