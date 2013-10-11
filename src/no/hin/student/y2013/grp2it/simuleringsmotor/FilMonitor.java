@@ -16,7 +16,7 @@ public class FilMonitor {
 	public FilMonitor()
 	{
 		xmlNewPath = Paths.get(".\\new\\");
-		xmlNewPath = Paths.get("/home/gruppe2/new/");
+//		xmlNewPath = Paths.get("/home/gruppe2/new/");
 		
 		xmlDonePath = Paths.get(".\\output\\");
 		xmlDonePath = Paths.get("/home/gruppe2/done/");
@@ -64,7 +64,7 @@ public class FilMonitor {
 //		        	System.err.printf("Filename: %s\n", tmpFile.getAbsolutePath(), tmpFile.getName());
 //		        	System.exit(2);
 		        	
-		        	file.toFile().renameTo(tmpFile);
+//		        	file.toFile().renameTo(tmpFile);
 		        }
 		    }
 		} catch (IOException | DirectoryIteratorException x) {

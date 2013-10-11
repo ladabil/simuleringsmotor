@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,6 +30,11 @@ public class SimuleringsMotor extends SimulatorBase {
 		
 	}
 	
+	public List<SimulatorBase> getSimulatorBaseList()
+	{
+		return this.simulatorBaseList;
+	}
+	
 	/*
 	 * Commons Daemon - metoder
 	 */	
@@ -52,7 +58,6 @@ public class SimuleringsMotor extends SimulatorBase {
 	
 	public SimuleringsMotor()
 	{
-		
 	}
 	
 	public void setFile(File file)
@@ -152,7 +157,7 @@ public class SimuleringsMotor extends SimulatorBase {
 	 */
 	public double getEnergiForbrukForPeriode(long startTime, long lengde)
 	{
-		Iterator<SimulatorBase> sbIt = simulatorBaseList.iterator();
+		Iterator<SimulatorBase> sbIt = this.getSimulatorBaseList().iterator();
 		double energiForbruk = 0;
 		SimuleringsResultat tmpSimRes = null;
 		

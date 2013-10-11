@@ -110,7 +110,8 @@ public class SimulatorBase {
 								tmpSimBase.setXMLNodeList(currentNode.getChildNodes());
 							}
 							
-							simulatorBaseList.add(tmpSimBase);
+							SimuleringsMotor.getSimuleringsMotor().getSimulatorBaseList().add(tmpSimBase);
+//							simulatorBaseList.add(tmpSimBase);
 							
 							tmpSimBase.parseXML();
 							

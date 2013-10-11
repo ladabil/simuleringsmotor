@@ -14,6 +14,9 @@ public class ForbrukVann extends BygningBase {
 	{
 		double forbrukVarmtVann = 0, multiplier = 0 , varmeTapVann = 0, handVask = 0, dusj = 0, badekar = 0, oppvask = 0, gulvvask  = 0;
 		
+//		System.out.println("doBeregning i ForbrukVann");
+//		System.exit(-1);
+		
 //		TODO: kalkuler multiplier fra array med alder
 		
 		if (antallPersoner < 1 )
