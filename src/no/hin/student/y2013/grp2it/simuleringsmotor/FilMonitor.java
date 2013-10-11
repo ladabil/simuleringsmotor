@@ -64,7 +64,7 @@ public class FilMonitor {
 //		        	System.err.printf("Filename: %s\n", tmpFile.getAbsolutePath(), tmpFile.getName());
 //		        	System.exit(2);
 		        	
-//		        	file.toFile().renameTo(tmpFile);
+		        	file.toFile().renameTo(tmpFile);
 		        }
 		    }
 		} catch (IOException | DirectoryIteratorException x) {
