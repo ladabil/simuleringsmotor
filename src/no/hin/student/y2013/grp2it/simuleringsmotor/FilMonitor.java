@@ -16,7 +16,7 @@ public class FilMonitor {
 	public FilMonitor()
 	{
 		xmlNewPath = Paths.get(".\\new\\");
-//		xmlNewPath = Paths.get("/home/gruppe2/new/");
+		xmlNewPath = Paths.get("/home/gruppe2/new/");
 		
 		xmlDonePath = Paths.get(".\\output\\");
 		xmlDonePath = Paths.get("/home/gruppe2/done/");
