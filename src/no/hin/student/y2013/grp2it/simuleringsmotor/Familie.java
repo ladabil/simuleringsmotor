@@ -30,14 +30,19 @@ public class Familie extends SimulatorBase {
 		}
 	}
 	
-	public double getFamilieAntallPersoner(double antallPersoner)
+	public int getFamilieAntallPersoner()
 	{
 		return this.antallPersoner;
 	}
-	public double getFamilieAlder(double personAlder)
+	public int getFamilieAlder()
 	{
 		return this.personAlder;
 	}
+	public String getFamilieVirke()
+	{
+		return this.personVirke;
+	}
+	
 	// Skriver ut parset data
 	public String toString()
 	{

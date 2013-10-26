@@ -27,12 +27,17 @@ public class SimulatorBase {
 	
 	protected double energiForbruk = 0;
 	protected double varmetap = 0; //***J***
+	protected double hvitevarerForbruk = 0;
+	protected double brunevarerForbruk = 0;
+	
 	
 	public SimulatorBase()
 	{
 		this.nodeList = null;
 		this.energiForbruk = 0;
 		this.varmetap = 0; //***J***
+		this.hvitevarerForbruk = 0;
+		this.brunevarerForbruk = 0;
 	}
 	
 	public double getBeregning()

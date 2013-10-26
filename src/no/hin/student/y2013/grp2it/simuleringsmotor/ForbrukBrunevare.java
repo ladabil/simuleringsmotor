@@ -5,14 +5,15 @@ package no.hin.student.y2013.grp2it.simuleringsmotor;
  */
 public class ForbrukBrunevare extends BygningBase {
 
-	double antall = 0, alder = 0;
-	double antallPersoner = SimuleringsMotor.getFamilie().getFamilieAntallPersoner(antall);
-	double personAlder = SimuleringsMotor.getFamilie().getFamilieAlder(alder);
+	
+	int antallPersoner = SimuleringsMotor.getFamilie().getFamilieAntallPersoner();
+	int personAlder = SimuleringsMotor.getFamilie().getFamilieAlder();
+	double brunevarerForbruk = 0;
 
 	//Utfører beregningene
 	public boolean doBeregning(long startTime, long lengde)	
 	{
-		double forbrukBrunevare = 0, dognbruk = 0;
+		double  forbrukBrunevare = 0, dognbruk = 0;
 		double tv, tvst, dvd, dvdst, radio, radiost, stereo, stereost, pc, mobil, internett;
 		
 //		Forbruksverdier i egen set (beregnet for senere admin endring via php
@@ -36,7 +37,7 @@ public class ForbrukBrunevare extends BygningBase {
 						(tv * 8)+
 						(tvst * 16)+ // st = 24t - brukstid
 						(dvd * 0.3)+
-						(dvd * 23.7)+
+						(dvdst * 23.7)+
 						(radio * 2)+
 						(radiost * 22)+
 						(stereo * 4)+
@@ -51,7 +52,7 @@ public class ForbrukBrunevare extends BygningBase {
 						(tv * 10)+
 						(tvst * 14)+ // st = 24t - brukstid
 						(dvd * 0)+
-						(dvd * 0)+
+						(dvdst * 0)+
 						(radio * 8)+
 						(radiost * 16)+
 						(stereo * 0)+
@@ -67,7 +68,7 @@ public class ForbrukBrunevare extends BygningBase {
 										(tv * 8)+
 										(tvst * 16)+ // st = 24t - brukstid
 										(dvd * 1)+
-										(dvd * 19)+
+										(dvdst * 19)+
 										(radio * 0)+
 										(radiost * 0)+
 										(stereo * 4)+
@@ -83,7 +84,7 @@ public class ForbrukBrunevare extends BygningBase {
 										(tv * 10)+
 										(tvst * 14)+ // st = 24t - brukstid
 										(dvd * 1)+
-										(dvd * 19)+
+										(dvdst * 19)+
 										(radio * 10)+
 										(radiost * 14)+
 										(stereo * 0)+
@@ -97,7 +98,7 @@ public class ForbrukBrunevare extends BygningBase {
 		}
 		}
 		
-		this.energiForbruk = (forbrukBrunevare / 1000); // omgjøring til kWh
+		this.energiForbruk = brunevarerForbruk = (forbrukBrunevare / 1000); // omgjøring til kWh
 		
 		System.out.format("AntallPersoner: %f\n", antallPersoner);
 		System.out.format("Energiforbruk brunevarer per døgn: %f\n", this.energiForbruk);

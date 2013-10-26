@@ -5,9 +5,9 @@ package no.hin.student.y2013.grp2it.simuleringsmotor;
  */
 public class ForbrukHvitevare extends BygningBase {
 
-	double antall = 0, alder = 0;
-	double antallPersoner = SimuleringsMotor.getFamilie().getFamilieAntallPersoner(antall);
-	double personAlder = SimuleringsMotor.getFamilie().getFamilieAlder(alder);
+	double antallPersoner = SimuleringsMotor.getFamilie().getFamilieAntallPersoner();
+	double personAlder = SimuleringsMotor.getFamilie().getFamilieAlder();
+	double hvitevarerForbruk = 0;
 
 	//Utfører beregningene
 	public boolean doBeregning(long startTime, long lengde)	
@@ -76,7 +76,7 @@ public class ForbrukHvitevare extends BygningBase {
 		 //beregner forbruk til hvitevarer
 		forbrukHvitevare = ((kjoleskap + fryseboks + stovsuger + komfyr + ventilator + mikro + kaffetrakter) + (multiplier * (oppvaskmaskin + torketrommel + oppvaskmaskin) ) );
 		
-		this.energiForbruk = (forbrukHvitevare / 1000); // omgjøring til kWh
+		this.energiForbruk = hvitevarerForbruk = (forbrukHvitevare / 1000); // omgjøring til kWh
 		
 		System.out.format("AntallPersoner: %f\n", antallPersoner);
 		System.out.format("hvitevarer multiplier: %f\n", multiplier);

@@ -6,8 +6,8 @@ package no.hin.student.y2013.grp2it.simuleringsmotor;
 public class ForbrukVann extends BygningBase {
 
 	double antall = 0, alder = 0;
-	double antallPersoner = SimuleringsMotor.getFamilie().getFamilieAntallPersoner(antall);
-	double personAlder = SimuleringsMotor.getFamilie().getFamilieAlder(alder);
+	double antallPersoner = SimuleringsMotor.getFamilie().getFamilieAntallPersoner();
+	double personAlder = SimuleringsMotor.getFamilie().getFamilieAlder();
 
 	//Utfører beregningene
 	public boolean doBeregning(long startTime, long lengde)	
