@@ -515,10 +515,38 @@ public class Klima extends SimulatorBase {
 		}
 	}
 	
+	public int getMalestasjonsnrFromSone()
+	{
+		switch ( this.getSone() )
+		{
+			case 1: // 1 = Sør-norge, kyst =  KRISTIANSAND S. (E. W.)
+				return 39190;
+			case 2: // 2 = Sør-norge, innland = 66620 - RENNEBU - RAMSTAD
+				return 66620;
+			case 3: // 3 = Sør-norge, høyfjellet = 31411 -> RJUKA
+				return 31411;
+			case 4: // 4 = Midt-Norge, kyst = 68860 -> TRONDHEIM - VOLL
+				return 68860;
+			case 5: // 5 = Midt-Norge, innland = 63705 -> OPPDAL - SÆTER
+				return 63705;
+			case 6: // 6 = Nord-norge - kyst = 86600 = Stokmarknes
+				return 86600;
+			case 7: // 7 = Finnmark og innland Troms = Bardu: 88100 - BONES I BARDU
+			default:
+				return 88100;
+		}
+	}
+	
 	/*
 	 * get og set-metoder for diverse variabler
 	 */
 	public int getMalestasjonsnr() {
+		if ( malestasjonsnr <= 0 && this.getSone() > 0 )
+		{
+			// Hvis målestasjonsnr er mindre eller lik 0, bruk sone, hvis satt
+			return this.getMalestasjonsnrFromSone();
+		}
+		
 		return malestasjonsnr;
 	}
 
