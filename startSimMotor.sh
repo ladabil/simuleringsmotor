@@ -14,5 +14,5 @@ MYCLASSPATH="${MYCLASSPATH}:/home/gruppe2/simuleringsmotor/bin"
 
 #export JAVA_HOME="/usr/lib/jvm/jre-openjdk/"
 
-/usr/bin/java -cp ${MYCLASSPATH} no.hin.student.y2013.grp2it.simuleringsmotor.SimuleringsMotor
-#/usr/bin/jsvc -jvm server -pidfile /var/run/simuleringsMotor_${1}.pid -outfile /tmp/out_${1}.log -errfile /tmp/err_${1}_err.log -cp ${MYCLASSPATH} no.hin.student.y2013.grp2it.simuleringsmotor.${1}
+#/usr/bin/java -cp ${MYCLASSPATH} no.hin.student.y2013.grp2it.simuleringsmotor.SimuleringsMotor
+/usr/bin/jsvc -jvm server -pidfile ~/simuleringsMotor_${1}.pid -outfile ~/out_${1}.log -errfile ~/err_${1}_err.log -cp ${MYCLASSPATH} no.hin.student.y2013.grp2it.simuleringsmotor.${1}

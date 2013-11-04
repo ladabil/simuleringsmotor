@@ -29,7 +29,10 @@ public class Tidsrom extends SimulatorBase {
 		
 		if ( node.getNodeName().equalsIgnoreCase("opplosning") )
 		{
-			this.opplosning = Integer.parseInt(node.getTextContent());
+			if ( Integer.parseInt(node.getTextContent()) > 0 )
+			{
+				this.opplosning = Integer.parseInt(node.getTextContent());
+			}
 		}
 		else if ( node.getNodeName().equalsIgnoreCase("startDateTime") )
 		{
