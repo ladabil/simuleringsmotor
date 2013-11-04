@@ -1,10 +1,5 @@
 package no.hin.student.y2013.grp2it.simuleringsmotor;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +39,12 @@ public class Klima extends SimulatorBase {
 			if ( showDebug() ) 
 				System.out.printf("Klima.Målestasjon: %d\n", this.getMalestasjonsnr());
 		}
+		else if ( node.getNodeName().equalsIgnoreCase("temperatureoffset") )
+		{
+			this.setDegreeOffset(Double.parseDouble(node.getTextContent()));
+			if ( showDebug() ) 
+				System.out.printf("Klima.DegreeOffset: %d\n", this.getDegreeOffset());
+		}
 		else
 		{
 			super.parseXMLNodeElement(node);
@@ -69,7 +70,7 @@ public class Klima extends SimulatorBase {
 			return 0.0f;
 		}
 		
-		return kd.getTemperature();
+		return kd.getTemperature() + this.getDegreeOffset();
 	}
 	
 	public String toString()
@@ -81,19 +82,6 @@ public class Klima extends SimulatorBase {
 		
 		return str.toString();
 	}
-
-	
-	/*
-	 * Predefinerte klimasoner:
-	 * 
-	 * 1 = Sør-Norge, innland
-	 * 2 = Sør-Norge, kyst
-	 * 3 = Sør-Norge, høyfjell
-	 * 4 = Midt-Norge, kyst
-	 * 5 = Midt-Norge, innland
-	 * 6 = Nord-Norge, kyst
-	 * 7 = Finnmark og indre Troms
-	 */
 
 	/*
 	 * metode som leser inn en XML-fil fra wsKlima (http://eklima.met.no/wsKlima/start/start_no.html)
@@ -515,6 +503,17 @@ public class Klima extends SimulatorBase {
 		}
 	}
 	
+	/*
+	 * Predefinerte klimasoner:
+	 * 
+	 * 1 = Sør-Norge, innland
+	 * 2 = Sør-Norge, kyst
+	 * 3 = Sør-Norge, høyfjell
+	 * 4 = Midt-Norge, kyst
+	 * 5 = Midt-Norge, innland
+	 * 6 = Nord-Norge, kyst
+	 * 7 = Finnmark og indre Troms
+	 */	
 	public int getMalestasjonsnrFromSone()
 	{
 		switch ( this.getSone() )
