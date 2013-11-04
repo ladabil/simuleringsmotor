@@ -38,9 +38,7 @@
 	<ForbrukBrunevare type="class">
 	</ForbrukBrunevare>
 	<Klima type="class">
-		<maalestasjon>86600</maalestasjon>
 		<sone>1</sone>
-		<temperatureoffset>-2.1</temperatureoffset>
 	</Klima>
 	<Tidsrom type="class">
 		<startDateTime>2012-05-19 10:00:00 CET</startDateTime>
