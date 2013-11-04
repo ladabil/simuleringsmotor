@@ -38,13 +38,19 @@ public class SimuleringsMotor extends SimulatorBase {
 	/*
 	 * Commons Daemon - metoder
 	 */	
+	public static void init(String[] args) 
+	{
+		MyLog.log("init simMotor\n");
+		main(args);
+	}
+	
 	public void start() {
 		MyLog.log("starting SimuleringsMotor\n");
 
 		FilMonitor filMonitor = new FilMonitor();
 		filMonitor.doRun();
 	}	
-
+	
 	public void stop()
 	{
 		MyLog.log("stopping zhoneProv\n");
