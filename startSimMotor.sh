@@ -4,6 +4,7 @@ PWD=`pwd`
 cd ${CLASSPATH}
 
 CLASSPATH="/usr/java"
+JAVA_HOME="/usr/lib/jvm/java-7-openjdk-i386/"
 
 MYCLASSPATH="${CLASSPATH}/commons-daemon-1.0.15.jar"
 MYCLASSPATH="${MYCLASSPATH}:${CLASSPATH}/commons-email-1.3.1.jar"
