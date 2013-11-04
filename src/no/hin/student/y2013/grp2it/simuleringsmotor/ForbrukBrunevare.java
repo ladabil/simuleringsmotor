@@ -13,6 +13,12 @@ public class ForbrukBrunevare extends BygningBase {
 	//Utfører beregningene
 	public boolean doBeregning(long startTime, long lengde)	
 	{
+		if ( this.antallPersoner <= 0 )
+		{
+			this.energiForbruk = 0;
+			return true;
+		}
+		
 		double  forbrukBrunevare = 0, dognbruk = 0;
 		double tv, tvst, dvd, dvdst, radio, radiost, stereo, stereost, pc, mobil, internett;
 		
