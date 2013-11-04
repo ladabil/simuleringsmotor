@@ -3,7 +3,7 @@
 PWD=`pwd`
 cd ${CLASSPATH}
 
-CLASSPATH="/usr/java"
+CLASSPATH="/home/gruppe2/simuleringsmotor"
 export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-i386/"
 
 MYCLASSPATH="${CLASSPATH}/commons-daemon-1.0.15.jar"
