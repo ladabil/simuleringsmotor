@@ -106,11 +106,9 @@ public class ForbrukBrunevare extends BygningBase {
 		
 		this.energiForbruk = brunevarerForbruk = (forbrukBrunevare / 1000); // omgjøring til kWh
 		
-		System.out.format("AntallPersoner: %f\n", antallPersoner);
+		//System.out.format("AntallPersoner: %f\n", antallPersoner);
 		System.out.format("Energiforbruk brunevarer per døgn: %f\n", this.energiForbruk);
 
 		return true;
-	
-	
 	}
 }

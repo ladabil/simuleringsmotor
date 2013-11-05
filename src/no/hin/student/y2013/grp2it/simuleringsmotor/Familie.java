@@ -1,5 +1,8 @@
 package no.hin.student.y2013.grp2it.simuleringsmotor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.Node;
 
 /*
@@ -32,8 +35,44 @@ public class Familie extends SimulatorBase {
 	
 	public int getFamilieAntallPersoner()
 	{
-		return this.antallPersoner;
+		int antPersoner = 0;
+		
+		if ( simulatorBaseList.size() > 0 )
+		{
+			for ( int i=0; i<simulatorBaseList.size(); i++ )
+			{
+//				System.out.println(simulatorBaseList.get(i).getClass().getCanonicalName());
+				
+				if ( simulatorBaseList.get(i).getClass().getCanonicalName().equals("no.hin.student.y2013.grp2it.simuleringsmotor.Person") )
+				{
+					antPersoner++;
+				}
+			}
+		}
+		
+		return antPersoner;
 	}
+	
+	public List<SimulatorBase> getPersonList()
+	{
+		List<SimulatorBase> simulatorBaseList = new ArrayList<SimulatorBase>();
+		
+		if ( simulatorBaseList.size() > 0 )
+		{
+			for ( int i=0; i<simulatorBaseList.size(); i++ )
+			{
+//				System.out.println(simulatorBaseList.get(i).getClass().getCanonicalName());
+				
+				if ( simulatorBaseList.get(i).getClass().getCanonicalName().equals("no.hin.student.y2013.grp2it.simuleringsmotor.Person") )
+				{
+					simulatorBaseList.add(simulatorBaseList.get(i));
+				}
+			}
+		}
+
+		return simulatorBaseList;
+	}
+	
 	public int getFamilieAlder()
 	{
 		return this.personAlder;
@@ -48,11 +87,11 @@ public class Familie extends SimulatorBase {
 	{
 		StringBuilder str = new StringBuilder();
 		str.append(String.format("+++++ Type: %s\n", this.getClass().getName()));
-		str.append(String.format("antallPersoner        = %d\n", this.antallPersoner));
+		str.append(String.format("antallPersoner        = %d\n", this.getFamilieAntallPersoner()));
 		str.append(String.format("personAlder        = %d\n", this.personAlder));
 		str.append(String.format("personVirke          = %d\n", this.personVirke));
 		str.append(String.format("----- Type Slutt\n"));
-		
+
 		return str.toString();
 	}
 }

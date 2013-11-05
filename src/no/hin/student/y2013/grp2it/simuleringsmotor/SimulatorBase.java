@@ -116,7 +116,9 @@ public class SimulatorBase {
 							}
 							
 							SimuleringsMotor.getSimuleringsMotor().getSimulatorBaseList().add(tmpSimBase);
-//							simulatorBaseList.add(tmpSimBase);
+							
+							// Legg til objektet
+							simulatorBaseList.add(tmpSimBase);
 							
 							tmpSimBase.parseXML();
 							
