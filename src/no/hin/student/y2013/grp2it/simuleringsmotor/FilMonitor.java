@@ -54,7 +54,7 @@ public class FilMonitor {
 		
 		try ( DirectoryStream<Path> stream = Files.newDirectoryStream(xmlNewPath)) {
 		    for (Path file: stream) {
-		    	outputFile = new File(xmlResultPath.toFile().getPath()  + "/" + file.toFile().getName() + ".csv");
+		    	outputFile = new File(xmlResultPath.toFile().getPath()  + "/" + file.toFile().getName().replaceAll(".xml", "") + ".csv");
 //		        System.out.println(file.getFileName());
 		        
 		        if ( runSimuleringsMotor(file, outputFile) )
