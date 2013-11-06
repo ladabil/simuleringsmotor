@@ -11,6 +11,7 @@ public class Person extends SimulatorBase {
 	
 	private int alder;
 	private int kjonn;
+	private double multiplier;
 	private String virke;
 	
 	public void parseXMLNodeElement(Node node)
@@ -75,5 +76,13 @@ public class Person extends SimulatorBase {
 
 	public void setKjonn(int kjonn) {
 		this.kjonn = kjonn;
+	}
+	
+	public void setMultiplier (double multiplier) {
+		this.multiplier = multiplier;
+	}
+	
+	public double getMultiplier() {
+		return multiplier;
 	}
 }
