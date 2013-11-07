@@ -53,8 +53,8 @@ public class Varmetap extends BygningBase {
 			varmetap = 0;
 		}
 
-//		this.energiForbruk = varmetap;
-		System.out.format("Varmetap: %f\n\n", this.energiForbruk);
+		System.out.format("Varmetap: %f - Varmetap/1000: %f\n\n", varmetap, (varmetap / 1000) );
+		this.energiForbruk = (varmetap / 1000);
 		
 		//beregning for oppvamingsbehov. Standardtallet for temperatur er satt fra 17 til ønsket temperatur, og algoritmen beregner bare pRomAreal istedet for brutto.
 		oppvarmingsbehov = (this.yttertakAreal*utak)+(this.ytterveggAreal*uvegg)+(this.pRomAreal*ugulv)+(this.vinduDorAreal*uvinduDor)+(kuldebro*this.pRomAreal)+(0.33*lekkasjetall*this.luftVolum*0.07)+(0.33*(this.luftVolum*0.5)*(1-gjenvinningsgrad));
@@ -66,8 +66,8 @@ public class Varmetap extends BygningBase {
 			oppvarmingsbehov = 0;
 		}
 		
-//		this.energiForbruk = oppvarmingsbehov;
-		System.out.format("Oppvarmingsbehov: %f - Temperatur = %f\n\n", this.energiForbruk, temperatur);
+		System.out.format("Oppvarmingsbehov: %f - Oppvarmingsbehov/1000: %f - Temperatur = %f\n\n", oppvarmingsbehov, (oppvarmingsbehov/1000), temperatur);
+		this.energiForbruk += (oppvarmingsbehov / 1000);
 		
 		return true;
 	}
