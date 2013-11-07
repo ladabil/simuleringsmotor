@@ -23,7 +23,7 @@ public class SimulatorBase {
 	protected List<SimulatorBase> simulatorBaseList = new ArrayList<SimulatorBase>();
 	protected List<SimuleringsResultat> simulatorResultList = new ArrayList<SimuleringsResultat>();
 	
-	private boolean showDebug = false;
+	private boolean showDebug = true;
 	
 	protected double energiForbruk = 0;
 	protected double varmetap = 0; //***J***

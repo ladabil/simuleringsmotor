@@ -70,6 +70,9 @@ public class Klima extends SimulatorBase {
 			return 0.0f;
 		}
 		
+		
+		
+//		return kd.getTemperature();
 		return kd.getTemperature() + this.getDegreeOffset();
 	}
 	
@@ -104,7 +107,7 @@ public class Klima extends SimulatorBase {
 		
 		retStrBuf.append(String.format("%s&to=%s&stations=%d", sdf.format(ds), sdf.format(de), this.getMalestasjonsnr()));
 		
-		System.out.printf("Måle: %s\n", this.getMalestasjonsnr());
+		System.out.printf("Målestasjonsnr: %s\n", this.getMalestasjonsnr());
 		
 		retStrBuf.append("&elements=DD06%2CDD12%2CDD18%2CFFM%2CFFN%2CFFX%2CPOM%2CPON%2CPOX%2CPRM%2CPRN%2CPRX%2CRR%2CSA%2CSD%2CSLAG%2CTAM%2CTAN%2CTAX&hours=&months=&username=");
 
@@ -518,12 +521,12 @@ public class Klima extends SimulatorBase {
 	{
 		switch ( this.getSone() )
 		{
-			case 1: // 1 = Sør-norge, kyst =  KRISTIANSAND S. (E. W.)
-				return 39190;
+			case 1: // 1 = Sør-norge, kyst =  STAVANGER - VÅLAND
+				return 44640;
 			case 2: // 2 = Sør-norge, innland = 66620 - RENNEBU - RAMSTAD
 				return 66620;
-			case 3: // 3 = Sør-norge, høyfjellet = 31411 -> RJUKA
-				return 31411;
+			case 3: // 3 = Sør-norge, høyfjellet = 31410 -> RJUKA
+				return 31410;
 			case 4: // 4 = Midt-Norge, kyst = 68860 -> TRONDHEIM - VOLL
 				return 68860;
 			case 5: // 5 = Midt-Norge, innland = 63705 -> OPPDAL - SÆTER
@@ -540,9 +543,12 @@ public class Klima extends SimulatorBase {
 	 * get og set-metoder for diverse variabler
 	 */
 	public int getMalestasjonsnr() {
+		if ( showDebug() ) System.out.println("getMalestasjonsnr, målestasjonsnr: " + malestasjonsnr);
+
 		if ( malestasjonsnr <= 0 && this.getSone() > 0 )
 		{
 			// Hvis målestasjonsnr er mindre eller lik 0, bruk sone, hvis satt
+			if ( showDebug() ) System.out.println("benytter sone, målestasjonsnr: " + this.getMalestasjonsnrFromSone());
 			return this.getMalestasjonsnrFromSone();
 		}
 		

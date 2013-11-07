@@ -53,7 +53,7 @@ public class Varmetap extends BygningBase {
 			varmetap = 0;
 		}
 
-		this.energiForbruk = varmetap;
+//		this.energiForbruk = varmetap;
 		System.out.format("Varmetap: %f\n\n", this.energiForbruk);
 		
 		//beregning for oppvamingsbehov. Standardtallet for temperatur er satt fra 17 til ønsket temperatur, og algoritmen beregner bare pRomAreal istedet for brutto.
@@ -66,8 +66,8 @@ public class Varmetap extends BygningBase {
 			oppvarmingsbehov = 0;
 		}
 		
-		this.energiForbruk = oppvarmingsbehov;
-		System.out.format("Oppvarmingsbehov: %f\n\n", this.energiForbruk);
+//		this.energiForbruk = oppvarmingsbehov;
+		System.out.format("Oppvarmingsbehov: %f - Temperatur = %f\n\n", this.energiForbruk, temperatur);
 		
 		return true;
 	}
