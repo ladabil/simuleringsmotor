@@ -9,10 +9,15 @@ public class Person extends SimulatorBase {
 	static public int kvinne = 1;
 	static public int mann = 2;
 	
+	static public int skole = 1;
+	static public int arbeid = 2;
+	static public int trygd = 3;
+
+	
 	private int alder;
 	private int kjonn;
 	private double multiplier;
-	private String virke;
+	private int virke;
 	
 	public void parseXMLNodeElement(Node node)
 	{
@@ -33,7 +38,7 @@ public class Person extends SimulatorBase {
 		}
 		else if ( node.getNodeName().equalsIgnoreCase("virke") )
 		{
-			this.setVirke(node.getTextContent()); 
+			this.setVirke(Integer.parseInt(node.getTextContent())); 
 		}
 		else
 		{
@@ -54,11 +59,11 @@ public class Person extends SimulatorBase {
 		return str.toString();
 	}
 
-	public String getVirke() {
+	public int getVirke() {
 		return virke;
 	}
 
-	public void setVirke(String virke) {
+	public void setVirke(int virke) {
 		this.virke = virke;
 	}
 
