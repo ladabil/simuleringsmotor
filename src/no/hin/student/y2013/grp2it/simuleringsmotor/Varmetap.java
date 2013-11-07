@@ -59,7 +59,7 @@ public class Varmetap extends BygningBase {
 		//beregning for oppvamingsbehov. Standardtallet for temperatur er satt fra 17 til ønsket temperatur, og algoritmen beregner bare pRomAreal istedet for brutto.
 		oppvarmingsbehov = (this.yttertakAreal*utak)+(this.ytterveggAreal*uvegg)+(this.pRomAreal*ugulv)+(this.vinduDorAreal*uvinduDor)+(kuldebro*this.pRomAreal)+(0.33*lekkasjetall*this.luftVolum*0.07)+(0.33*(this.luftVolum*0.5)*(1-gjenvinningsgrad));
 		if (temperatur<this.onsketTemp){
-			oppvarmingsbehov = oppvarmingsbehov*(this.onsketTemp-temperatur);
+			oppvarmingsbehov = oppvarmingsbehov*( (this.onsketTemp-17)-temperatur);
 		}
 		//Ved 17 grader og opp er det ikke noe varmetap
 		if (temperatur>=this.onsketTemp){

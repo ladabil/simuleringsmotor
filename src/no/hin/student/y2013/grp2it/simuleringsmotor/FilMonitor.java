@@ -16,13 +16,13 @@ public class FilMonitor {
 	public FilMonitor()
 	{
 		xmlNewPath = Paths.get(".\\new\\");
-//		xmlNewPath = Paths.get("/home/gruppe2/new/");
+		xmlNewPath = Paths.get("/home/gruppe2/new/");
 		
 		xmlDonePath = Paths.get(".\\done\\");
-//		xmlDonePath = Paths.get("/home/gruppe2/done/");
+		xmlDonePath = Paths.get("/home/gruppe2/done/");
 
 		xmlResultPath = Paths.get(".\\output\\");
-//		xmlResultPath = Paths.get("/home/gruppe2/output/");
+		xmlResultPath = Paths.get("/home/gruppe2/output/");
 	}
 
 	/*
