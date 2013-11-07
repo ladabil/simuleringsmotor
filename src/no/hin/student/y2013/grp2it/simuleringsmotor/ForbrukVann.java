@@ -1,5 +1,7 @@
 package no.hin.student.y2013.grp2it.simuleringsmotor;
 
+import java.util.Formatter;
+
 /*
  * ForbrukVann - 08/10-2013
  */
@@ -12,10 +14,62 @@ public class ForbrukVann extends BygningBase {
 	//Utfører beregningene
 	public boolean doBeregning(long startTime, long lengde)	
 	{
-		double forbrukVarmtVann = 0, multiplier = 0 , varmeTapVann = 0, handVask = 0, dusj = 0, badekar = 0, oppvask = 0, gulvvask  = 0;
+		double forbrukVarmtVann = 0, multiplier = 0 , varmeTapVann = 0, handVask = 0, dusj = 0, badekar = 0, oppvask = 0, gulvvask  = 0,
+				varmeTapVannfaktor = 0, handvaksfaktor = 0, dusjfaktor = 0, badekarfaktor = 0, oppvaskfaktor = 0, gulvvaskfaktor = 0;
 		
 //		System.out.println("doBeregning i ForbrukVann");
 //		System.exit(-1);
+		
+		Formatter tf = new Formatter();
+		int time = Integer.parseInt((tf.format("%TH", startTime)).toString());
+		
+		if (time >= 0 && time <= 6 )
+		{
+			// opplistning av alle faktorer
+			varmeTapVannfaktor = 0.0;
+			handvaksfaktor = 0.0;
+			dusjfaktor = 0.0;
+			badekarfaktor = 0.0;
+			oppvaskfaktor = 0.0;
+			gulvvaskfaktor = 0.0;
+		}
+		else if (time == 7 )
+		{
+			varmeTapVannfaktor = 0.25;
+			handvaksfaktor = 0.25;
+			dusjfaktor = 0.5;
+			badekarfaktor = 0.0;
+			oppvaskfaktor = 0.0;
+			gulvvaskfaktor = 0.0;
+		}
+		else if (time >= 8 && time <= 15 )
+		{
+			varmeTapVannfaktor = 0.0;
+			handvaksfaktor = 0.0;
+			dusjfaktor = 0.0;
+			badekarfaktor = 0.0;
+			oppvaskfaktor = 0.0;
+			gulvvaskfaktor = 0.0;
+		}
+		else if (time >= 16 && time <= 20 )
+		{
+			varmeTapVannfaktor = 0.5;
+			handvaksfaktor = 0.5;
+			dusjfaktor = 0.0;
+			badekarfaktor = 0.0;
+			oppvaskfaktor = 1.0;
+			gulvvaskfaktor = 0.0;
+		}
+		else if (time >= 21 && time <= 23 )
+		{
+			varmeTapVannfaktor = 0.25;
+			handvaksfaktor = 0.25;
+			dusjfaktor = 0.5;
+			badekarfaktor = 1.0;
+			oppvaskfaktor = 0.0;
+			gulvvaskfaktor = 1.0;
+		}
+		
 		
 //		TODO: kalkuler multiplier fra array med alder
 		
@@ -90,13 +144,14 @@ public class ForbrukVann extends BygningBase {
 		 //beregner forbruk til tappevann 
 		 // (effekt-tap oppvarming + forholdstall familie * (4 håndvask per pers per døgn + 1 dusj per pers per døgn + 
 		 // oppvask hånd hver 5. dag(forhold om oppvaskmaskin hvitevare + 1 gulvvask hver uke) 
-		forbrukVarmtVann = (varmeTapVann) + (multiplier * ((handVask * 4) + dusj + (oppvask / 5) + ( gulvvask / 7 ) ) ) ;
+		forbrukVarmtVann = (varmeTapVann * varmeTapVannfaktor) + (multiplier * ((handVask * handvaksfaktor) + (dusj * dusjfaktor) + ((oppvask / 5) * oppvaskfaktor) + ( (gulvvask / 7) * gulvvaskfaktor ) ) ) ;
 		
 		this.energiForbruk = forbrukVarmtVann;
 		
-		System.out.format("Vann multiplier: %f\n", multiplier);
-		System.out.format("AntallPersoner: %f\n", antallPersoner);
-		System.out.format("Energiforbruk Vann per døgn: %f\n", this.energiForbruk);
+//		System.out.format("Vann multiplier: %f\n", multiplier);
+//		System.out.format("AntallPersoner: %f\n", antallPersoner);
+		System.out.println("Tid " + time);
+		System.out.format("Energiforbruk Vann denne timen: %f\n", this.energiForbruk);
 
 		return true;
 	}

@@ -224,10 +224,14 @@ public class ForbrukHvitevare extends BygningBase {
 		
 
 //		Verdier for utregning (effekt (parset) * brukstid per døgn * faktor (% forbruk for time)) <-- egen side i GUI for input (effekt, type, antall, brukstid) ?
+		// uavhengige faktorer
+		kjoleskapfaktor = 1.0;
+		fryseboksfaktor = 1.0;
+		 
 		
 		// Uavhengie verdier
-		forbrukkjoleskap = (kjoleskap * 7.7 * kjoleskapfaktor);
-		forbrukfryseboks  = (fryseboks * 10 * fryseboksfaktor); 
+		forbrukkjoleskap = (kjoleskap * 0.77 * kjoleskapfaktor);
+		forbrukfryseboks  = (fryseboks * 1.0 * fryseboksfaktor); 
 		forbrukstovsuger = (stovsuger * 0.15 * stovsugerfaktor);	
 		forbrukkomfyr = (komfyr * 1 * komfyrfaktor);
 		forbrukventilator = (ventilator * 0.28 * ventilatorfaktor);
@@ -261,10 +265,11 @@ public class ForbrukHvitevare extends BygningBase {
 		
 		this.energiForbruk = hvitevarerForbruk = ((forbrukHvitevare+forbrukMedMultiplier) / 1000); // omgjøring til kWh
 		
-		System.out.format("AntallPersoner: %d\n", personliste.size());
+//		System.out.format("AntallPersoner: %d\n", personliste.size());
 	//	System.out.format("hvitevarer multiplier: %f\n", multiplier);
+//		System.out.println("Tid " + time);
 		System.out.format("Energiforbruk hvitevarer denne timen: %f\n", this.energiForbruk);
-		System.out.println("Tid " + time);
+		
 		
 
 		return true;
