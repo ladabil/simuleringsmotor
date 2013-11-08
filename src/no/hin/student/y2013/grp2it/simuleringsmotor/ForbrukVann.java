@@ -19,7 +19,8 @@ public class ForbrukVann extends BygningBase {
 	{
 		double forbrukVarmtVann = 0, multiplier = 0 , varmeTapVann = 0, handVask = 0, dusj = 0, badekar = 0, oppvask = 0, gulvvask  = 0,
 				varmeTapVannfaktor = 0, handvaksfaktor = 0, dusjfaktor = 0, badekarfaktor = 0, oppvaskfaktor = 0, gulvvaskfaktor = 0, oppvarming = 0,
-				privarm = 0, secvarm = 0, el = 0;
+				privarm = 0, secvarm = 0, el = 0, oppvarmfaktor = 0;
+		double temperatur = SimuleringsMotor.getKlima().getTemperatureForTime(startTime);
 		
 //		System.out.println("doBeregning i ForbrukVann");
 //		System.exit(-1);
@@ -151,21 +152,35 @@ public class ForbrukVann extends BygningBase {
 		forbrukVarmtVann = (varmeTapVann * varmeTapVannfaktor) + (multiplier * ((handVask * handvaksfaktor) + (dusj * dusjfaktor) + ((oppvask / 5) * oppvaskfaktor) + ( (gulvvask / 7) * gulvvaskfaktor ) ) ) ;
 		
 		// Oppvarming
+		if (temperatur >= 17)
+		{ 
+			oppvarmfaktor = 0.05;
+		}
+		else if (temperatur >=4 && temperatur < 17)
+		{ 
+			oppvarmfaktor = 0.4;
+		}
+		else if (temperatur < 4)
+		{
+			oppvarmfaktor = 0.9;
+		}
+		
 		privarm = ( ( (this.priHeat /24 ) * ( (100 - this.heatDiff)/100) ) /1000  );
 		secvarm = ( (this.secHeat /24 ) * ( this.heatDiff/100) /1000  );
 		el = ( (floorHeatEl * 150) /1000 );
 		
 		oppvarming = privarm + secvarm + el;
 //		oppvarming = oppvarming * this.varmetap;
-		oppvarming = oppvarming * 25;
+		oppvarming = oppvarming * oppvarmfaktor;
 		
-		this.energiForbruk = forbrukVarmtVann + oppvarming;
+		this.energiForbruk = forbrukVarmtVann;
 		
-//		System.out.format("Vann multiplier: %f\n", multiplier);
+		System.out.format("Vann multiplier: %f\n", multiplier);
 //		System.out.format("AntallPersoner: %f\n", antallPersoner);
 		System.out.println("Tid " + time);
 //		System.out.format("Energiforbruk varmetap: %f\n", varmetap);
 //		System.out.format("Energiforbruk varmetap2: %f\n", varmetao);
+		System.out.format("Faktor oppvarming: %f\n", oppvarmfaktor);
 		System.out.format("Energiforbruk Vann denne timen: %f\n", forbrukVarmtVann);
 		System.out.format("Energiforbruk oppvarming denne timen: %f\n", oppvarming);
 

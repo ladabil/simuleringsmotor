@@ -94,8 +94,8 @@ public class Belysning extends BygningBase {
 			}
 				
 				forbrukLys = (
-						(priLysType * (antLys * (lysDiff/100)) * (brenntid * lysfaktor) +
-						(secLysType * (antLys * ((100 - lysDiff)/100)) * (brenntid * lysfaktor)) )
+						(priLysType * (antLys * (lysDiff/100)) * lysfaktor) +
+						(secLysType * (antLys * ((100 - lysDiff)/100)) * lysfaktor) 
 						);
 			
 			
