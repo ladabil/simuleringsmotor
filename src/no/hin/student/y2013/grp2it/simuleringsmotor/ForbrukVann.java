@@ -121,13 +121,13 @@ public class ForbrukVann extends BygningBase {
 		}
 	
 		if (this.priBoilerSize > 0 && this.priBoilerSize < 70) {
-			//this.energiForbruk = priBoilerPower;
+			this.energiForbruk = priBoilerPower;
 			varmeTapVann = 0.8;
 			handVask = 0.25;		
 		}
 	
 		if (this.priBoilerSize > 70 && this.priBoilerSize < 140) {
-			//this.energiForbruk = priBoilerPower;
+			this.energiForbruk = priBoilerPower;
 			varmeTapVann = 1.2;
 			handVask = 0.25;		
 		}
@@ -157,7 +157,7 @@ public class ForbrukVann extends BygningBase {
 		
 		oppvarming = privarm + secvarm + el;
 //		oppvarming = oppvarming * this.varmetap;
-		oppvarming = oppvarming * 35;
+		oppvarming = oppvarming * 25;
 		
 		this.energiForbruk = forbrukVarmtVann + oppvarming;
 		
