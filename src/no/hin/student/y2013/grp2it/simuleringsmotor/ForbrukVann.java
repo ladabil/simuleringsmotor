@@ -12,7 +12,7 @@ public class ForbrukVann extends BygningBase {
 	double antall = 0, alder = 0;
 	double antallPersoner = SimuleringsMotor.getFamilie().getFamilieAntallPersoner();
 	double personAlder = SimuleringsMotor.getFamilie().getFamilieAlder();
-	double varmetao = getVarmetap();
+//	double varmetao = SimuleringsMotor.getVarmetap().getVarmetap();
 	
 	//Utfører beregningene
 	public boolean doBeregning(long startTime, long lengde)	
@@ -115,25 +115,25 @@ public class ForbrukVann extends BygningBase {
 		
 		// Kalkuler verdier avhengig av størrelse varmtvannstank	
 		if (this.priBoilerSize == 0) {
-			this.energiForbruk = priBoilerPower;
+			//this.energiForbruk = priBoilerPower;
 			varmeTapVann = 0;
 			handVask = 0.04;		
 		}
 	
 		if (this.priBoilerSize > 0 && this.priBoilerSize < 70) {
-			this.energiForbruk = priBoilerPower;
+			//this.energiForbruk = priBoilerPower;
 			varmeTapVann = 0.8;
 			handVask = 0.25;		
 		}
 	
 		if (this.priBoilerSize > 70 && this.priBoilerSize < 140) {
-			this.energiForbruk = priBoilerPower;
+			//this.energiForbruk = priBoilerPower;
 			varmeTapVann = 1.2;
 			handVask = 0.25;		
 		}
 	
 		if (this.priBoilerSize > 140) {
-			this.energiForbruk = priBoilerPower;
+			//this.energiForbruk = priBoilerPower;
 			varmeTapVann = 1.9;
 			handVask = 0.25;		
 		}
