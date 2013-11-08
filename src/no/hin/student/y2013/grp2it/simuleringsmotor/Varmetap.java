@@ -3,6 +3,12 @@ package no.hin.student.y2013.grp2it.simuleringsmotor;
 
 public class Varmetap extends BygningBase {
 
+	public double getVarmetap()
+	{
+		double varmetap = this.energiForbruk;
+		return varmetap ;
+	}
+	
 	public boolean doBeregning(long startTime, long lengde)
 	{
 		double temperatur = SimuleringsMotor.getKlima().getTemperatureForTime(startTime);
@@ -67,10 +73,14 @@ public class Varmetap extends BygningBase {
 		}
 		
 		System.out.format("Oppvarmingsbehov: %f - Oppvarmingsbehov/1000: %f - Temperatur = %f\n\n", oppvarmingsbehov, (oppvarmingsbehov/1000), temperatur);
-		this.energiForbruk += (oppvarmingsbehov / 1000);
+		if (oppvarmingsbehov > 0)
+		{
+			this.energiForbruk += (oppvarmingsbehov / 1000);
+		}
 		
 		return true;
 	}
+	
 	
 
 }

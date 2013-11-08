@@ -26,7 +26,7 @@ public class SimulatorBase {
 	private boolean showDebug = true;
 	
 	protected double energiForbruk = 0;
-	protected double varmetap = 0; //***J***
+
 	protected double hvitevarerForbruk = 0;
 	protected double brunevarerForbruk = 0;
 	
@@ -35,7 +35,7 @@ public class SimulatorBase {
 	{
 		this.nodeList = null;
 		this.energiForbruk = 0;
-		this.varmetap = 0; //***J***
+
 		this.hvitevarerForbruk = 0;
 		this.brunevarerForbruk = 0;
 	}
@@ -45,11 +45,7 @@ public class SimulatorBase {
 		return this.energiForbruk;
 	}
 	
-	public double getVarmetap() //***J***
-	{
-		return this.varmetap;
 	
-	}
 	
 	// Setter nodelisten (noder i XML-filen som tilhører meg..)
 	public void setXMLNodeList(NodeList nodeList) 

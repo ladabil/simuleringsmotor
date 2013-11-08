@@ -17,6 +17,7 @@ public class SimuleringsMotor extends SimulatorBase {
 	public Tidsrom tidsrom = null;
 	public Klima klima = null;
 	public Familie familie = null;
+	public Varmetap varmetap = null;
 	private File xmlFile = null;
 	
 	/**
@@ -109,6 +110,16 @@ public class SimuleringsMotor extends SimulatorBase {
 	public static void setFamilie(Familie familie)
 	{
 		SimuleringsMotor.getSimuleringsMotor().familie = familie;
+	}	
+	
+	public static Varmetap getVarmetap()
+	{
+		return SimuleringsMotor.getSimuleringsMotor().varmetap ;
+	}
+	
+	public static void setVarmetap(Varmetap varmetap)
+	{
+		SimuleringsMotor.getSimuleringsMotor().varmetap = varmetap;
 	}	
 	
 	/*
