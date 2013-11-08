@@ -2,6 +2,8 @@ package no.hin.student.y2013.grp2it.simuleringsmotor;
 
 import java.util.Formatter;
 
+import org.w3c.dom.Node;
+
 /*
  * ForbrukVann - 08/10-2013
  */
@@ -10,12 +12,14 @@ public class ForbrukVann extends BygningBase {
 	double antall = 0, alder = 0;
 	double antallPersoner = SimuleringsMotor.getFamilie().getFamilieAntallPersoner();
 	double personAlder = SimuleringsMotor.getFamilie().getFamilieAlder();
-
+	double varmetao = getVarmetap();
+	
 	//Utfører beregningene
 	public boolean doBeregning(long startTime, long lengde)	
 	{
 		double forbrukVarmtVann = 0, multiplier = 0 , varmeTapVann = 0, handVask = 0, dusj = 0, badekar = 0, oppvask = 0, gulvvask  = 0,
-				varmeTapVannfaktor = 0, handvaksfaktor = 0, dusjfaktor = 0, badekarfaktor = 0, oppvaskfaktor = 0, gulvvaskfaktor = 0;
+				varmeTapVannfaktor = 0, handvaksfaktor = 0, dusjfaktor = 0, badekarfaktor = 0, oppvaskfaktor = 0, gulvvaskfaktor = 0, oppvarming = 0,
+				privarm = 0, secvarm = 0, el = 0;
 		
 //		System.out.println("doBeregning i ForbrukVann");
 //		System.exit(-1);
@@ -146,12 +150,24 @@ public class ForbrukVann extends BygningBase {
 		 // oppvask hånd hver 5. dag(forhold om oppvaskmaskin hvitevare + 1 gulvvask hver uke) 
 		forbrukVarmtVann = (varmeTapVann * varmeTapVannfaktor) + (multiplier * ((handVask * handvaksfaktor) + (dusj * dusjfaktor) + ((oppvask / 5) * oppvaskfaktor) + ( (gulvvask / 7) * gulvvaskfaktor ) ) ) ;
 		
-		this.energiForbruk = forbrukVarmtVann;
+		// Oppvarming
+		privarm = ( ( (this.priHeat /24 ) * ( (100 - this.heatDiff)/100) ) /1000  );
+		secvarm = ( (this.secHeat /24 ) * ( this.heatDiff/100) /1000  );
+		el = ( (floorHeatEl * 150) /1000 );
+		
+		oppvarming = privarm + secvarm + el;
+//		oppvarming = oppvarming * this.varmetap;
+		oppvarming = oppvarming * 35;
+		
+		this.energiForbruk = forbrukVarmtVann + oppvarming;
 		
 //		System.out.format("Vann multiplier: %f\n", multiplier);
 //		System.out.format("AntallPersoner: %f\n", antallPersoner);
 		System.out.println("Tid " + time);
-		System.out.format("Energiforbruk Vann denne timen: %f\n", this.energiForbruk);
+//		System.out.format("Energiforbruk varmetap: %f\n", varmetap);
+//		System.out.format("Energiforbruk varmetap2: %f\n", varmetao);
+		System.out.format("Energiforbruk Vann denne timen: %f\n", forbrukVarmtVann);
+		System.out.format("Energiforbruk oppvarming denne timen: %f\n", oppvarming);
 
 		return true;
 	}

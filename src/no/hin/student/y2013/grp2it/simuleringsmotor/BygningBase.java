@@ -19,6 +19,11 @@ public class BygningBase extends SimulatorBase {
 	protected int secBoilerSize = 0; //***Rune***
 	protected int secBoilerPower = 0; //***Rune***
 	protected int bathtubeSize = 0; //***Rune***
+	protected double priHeat = 73;
+	protected double secHeat = 0;
+	protected double heatDiff = 0;
+	protected double floorHeatWa = 0; 
+	protected double floorHeatEl = 0;
 	
 	public void parseXMLNodeElement(Node node)
 	{
@@ -69,6 +74,26 @@ public class BygningBase extends SimulatorBase {
 		else if ( node.getNodeName().equalsIgnoreCase("secBoilerPower") ) //***Rune***
 		{
 			this.secBoilerPower = Integer.parseInt(node.getTextContent());
+		}
+		else if ( node.getNodeName().equalsIgnoreCase("priHeat") ) //***Rune***
+		{
+			this.priHeat = Integer.parseInt(node.getTextContent());
+		}
+		else if ( node.getNodeName().equalsIgnoreCase("secHeat") ) //***Rune***
+		{
+			this.secHeat = Integer.parseInt(node.getTextContent());
+		}
+		else if ( node.getNodeName().equalsIgnoreCase("heatDiff") ) //***Rune***
+		{
+			this.heatDiff = Integer.parseInt(node.getTextContent());
+		}
+		else if ( node.getNodeName().equalsIgnoreCase("floorHeatWa") ) //***Rune***
+		{
+			this.floorHeatWa = Integer.parseInt(node.getTextContent());
+		}
+		else if ( node.getNodeName().equalsIgnoreCase("floorHeatEl") ) //***Rune***
+		{
+			this.floorHeatEl = Integer.parseInt(node.getTextContent());
 		}
 		else
 		{
