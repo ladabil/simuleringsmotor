@@ -133,7 +133,7 @@ public class ForbrukVann extends BygningBase {
 		}
 	
 		if (this.priBoilerSize > 140) {
-			//this.energiForbruk = priBoilerPower;
+			this.energiForbruk = priBoilerPower;
 			varmeTapVann = 1.9;
 			handVask = 0.25;		
 		}
