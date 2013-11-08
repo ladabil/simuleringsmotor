@@ -43,7 +43,7 @@ public class Klima extends SimulatorBase {
 		{
 			this.setDegreeOffset(Double.parseDouble(node.getTextContent()));
 			if ( showDebug() ) 
-				System.out.printf("Klima.DegreeOffset: %d\n", this.getDegreeOffset());
+				System.out.printf("Klima.DegreeOffset: %f\n", this.getDegreeOffset());
 		}
 		else
 		{
